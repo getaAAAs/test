@@ -107,7 +107,7 @@ body::before {
     right: 0;
     bottom: 0;
     background: 
-        url('bj.jpg') center/cover no-repeat,  /* ← 修改这里：图片文件名和显示方式 */
+        url('bj1.jpg') center/cover no-repeat,  /* ← 修改这里：图片文件名和显示方式 */
         linear-gradient(45deg, #ff6b6b, #4ecdc4);
     z-index: -2;
     border-radius: var(--radius-large);
