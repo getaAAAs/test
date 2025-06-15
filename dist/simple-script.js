@@ -14,7 +14,7 @@ const customSettings = {
         // "weixin://" - 打开微信
         // "tel:13800138000" - 拨打电话
         // "mailto:your@email.com" - 发送邮件
-        content: "https://developer.harmonyos.com/en/design",  // ← 修改这里：二维码内容
+        content: "https://pan.quark.cn/s/dbdf672207aa",  // ← 修改这里：二维码内容
         
         // 🎨 二维码样式设置
         size: 150,              // ← 修改这里：尺寸大小（像素）
