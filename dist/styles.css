@@ -1,11 +1,13 @@
-/* 91风格 - 简约现代设计 - 高级版【最终完美修复版】
-   适配参考站视觉：背景图完整显示+渐变融合+边框无错位 */
+/* 91风格 - 简约现代设计 - 高级版【最终全屏铺满修复版】 */
+
+/* 重置样式 */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+/* CSS变量 */
 :root {
     --primary-color: #6366f1;
     --secondary-color: #f1f5f9;
@@ -23,6 +25,7 @@
     --backdrop-blur: blur(24px);
 }
 
+/* 基础样式 */
 body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'SF Pro Display', Roboto, sans-serif;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
@@ -33,6 +36,7 @@ body {
     position: relative;
 }
 
+/* 动态背景效果 */
 body::before {
     content: '';
     position: fixed;
@@ -41,8 +45,18 @@ body::before {
     width: 100%;
     height: 100%;
     background: 
-        repeating-linear-gradient(90deg,transparent,transparent 98px,rgba(255,255,255,0.03) 100px),
-        repeating-linear-gradient(0deg,transparent,transparent 98px,rgba(255,255,255,0.03) 100px);
+        repeating-linear-gradient(
+            90deg,
+            transparent,
+            transparent 98px,
+            rgba(255, 255, 255, 0.03) 100px
+        ),
+        repeating-linear-gradient(
+            0deg,
+            transparent,
+            transparent 98px,
+            rgba(255, 255, 255, 0.03) 100px
+        );
     pointer-events: none;
     z-index: -1;
     animation: backgroundShift 20s ease-in-out infinite;
@@ -53,29 +67,31 @@ body::before {
     50% { opacity: 0.6; transform: translateX(20px) translateY(10px); }
 }
 
+/* 容器 - 全屏铺满 */
 .container {
-    max-width: 520px;
-    margin: 0 auto;
-    padding: 24px;
+    max-width: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
     min-height: 100vh;
     position: relative;
 }
 
-/* 主卡片核心修复：还原内边距+解决边框/背景错位 */
+/* 主内容区 - 全屏铺满 */
 .profile-container {
     position: relative;
-    border-radius: var(--radius-large);
+    border-radius: 0;
     padding: 48px 44px;
-    box-shadow: var(--shadow-heavy);
-    margin: 24px 0 120px 0;
-    border: 1px solid rgba(255, 255, 255, 0.4);
+    box-shadow: none;
+    margin: 0;
+    border: none;
     overflow: hidden;
     animation: fadeInUp 0.8s ease-out;
-    /* 新增：防止容器层级错乱 */
     z-index: 1;
+    min-height: 100vh;
 }
 
-/* 背景图核心：完整显示+居中+无重复 【关键修复】 */
+/* 背景图片 - 全屏覆盖 */
 .profile-container::before {
     content: '';
     position: absolute;
@@ -83,14 +99,13 @@ body::before {
     left: 0;
     width: 100%;
     height: 100%;
-    background: url('bj1.jpg') center/cover  no-repeat;
+    background: url('bj1.jpg') center/cover no-repeat;
     z-index: -2;
-    border-radius: var(--radius-large);
-    /* 固定背景：防止滚动/动效导致错位 */
-    background-attachment: local;
+    border-radius: 0;
+    background-attachment: fixed;
 }
 
-/* 渐变遮罩层：参考站轻渐变+低透明度 【关键修复】 */
+/* 背景渐变遮罩 - 全屏适配 */
 .profile-container::after {
     content: '';
     position: absolute;
@@ -100,9 +115,10 @@ body::before {
     height: 100%;
     background: linear-gradient(45deg, rgba(255,107,107,0.2), rgba(78,205,196,0.2));
     z-index: -1;
-    border-radius: var(--radius-large);
+    border-radius: 0;
 }
 
+/* 主容器顶部光效 */
 .profile-container .shimmer-line {
     position: absolute;
     top: 0;
@@ -111,7 +127,7 @@ body::before {
     height: 1px;
     background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.8), transparent);
     animation: shimmer 3s ease-in-out infinite;
-    z-index: 2;
+    z-index: 1;
 }
 
 @keyframes shimmer {
@@ -124,7 +140,7 @@ body::before {
     text-align: center;
     margin-bottom: 36px;
     position: relative;
-    z-index: 2;
+    z-index: 1;
 }
 
 .avatar-container {
@@ -132,7 +148,6 @@ body::before {
     width: 120px;
     height: 120px;
     margin: 0 auto 24px;
-    z-index: 2;
 }
 
 .avatar {
@@ -141,12 +156,15 @@ body::before {
     border-radius: 50%;
     object-fit: cover;
     border: 4px solid rgba(255, 255, 255, 0.9);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15),0 0 0 8px rgba(255, 255, 255, 0.1);
+    box-shadow: 
+        0 20px 40px rgba(0, 0, 0, 0.15),
+        0 0 0 8px rgba(255, 255, 255, 0.1);
     transition: var(--transition);
     position: relative;
-    z-index: 3;
+    z-index: 2;
 }
 
+/* 头像悬浮效果 */
 .avatar-container::before {
     content: '';
     position: absolute;
@@ -156,7 +174,7 @@ body::before {
     bottom: -8px;
     border-radius: 50%;
     background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
-    z-index: 2;
+    z-index: 1;
     opacity: 0;
     transition: var(--transition);
     animation: pulseGlow 4s ease-in-out infinite;
@@ -168,7 +186,9 @@ body::before {
 
 .avatar-container:hover .avatar {
     transform: scale(1.05);
-    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2),0 0 0 12px rgba(255, 255, 255, 0.15);
+    box-shadow: 
+        0 25px 50px rgba(0, 0, 0, 0.2),
+        0 0 0 12px rgba(255, 255, 255, 0.15);
 }
 
 @keyframes pulseGlow {
@@ -200,16 +220,21 @@ body::before {
 .profile-stats {
     display: flex;
     justify-content: space-around;
-    background: linear-gradient(135deg, rgba(99,102,241,0.08), rgba(236,72,153,0.06), rgba(59,130,246,0.08));
+    background: linear-gradient(135deg, 
+        rgba(99, 102, 241, 0.08) 0%, 
+        rgba(236, 72, 153, 0.06) 50%, 
+        rgba(59, 130, 246, 0.08) 100%);
     backdrop-filter: blur(16px);
     border-radius: 14px;
     padding: 20px 20px;
     margin-bottom: 32px;
     border: 1px solid rgba(99, 102, 241, 0.15);
-    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.08),inset 0 1px 0 rgba(255, 255, 255, 0.6);
+    box-shadow: 
+        0 4px 12px rgba(99, 102, 241, 0.08),
+        inset 0 1px 0 rgba(255, 255, 255, 0.6);
     position: relative;
     overflow: hidden;
-    z-index: 2;
+    z-index: 1;
 }
 
 .profile-stats::before {
@@ -219,7 +244,10 @@ body::before {
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(45deg, rgba(99,102,241,0.03),transparent,rgba(236,72,153,0.03));
+    background: linear-gradient(45deg, 
+        rgba(99, 102, 241, 0.03) 0%, 
+        transparent 50%, 
+        rgba(236, 72, 153, 0.03) 100%);
     pointer-events: none;
 }
 
@@ -263,7 +291,7 @@ body::before {
 .links-section {
     margin-bottom: 36px;
     position: relative;
-    z-index: 2;
+    z-index: 1;
 }
 
 .main-links {
@@ -288,6 +316,7 @@ body::before {
     overflow: hidden;
 }
 
+/* 链接悬浮效果 */
 .main-link::before {
     content: '';
     position: absolute;
@@ -333,41 +362,52 @@ body::before {
     transform: translateX(4px);
 }
 
-/* 渐变链接样式 */
+/* 渐变样式升级 */
 .gradient-1 {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
     border: 1px solid rgba(255, 255, 255, 0.3);
-    box-shadow: var(--shadow-medium),inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    box-shadow: 
+        var(--shadow-medium),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
 .gradient-2 {
     background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
     color: white;
     border: 1px solid rgba(255, 255, 255, 0.3);
-    box-shadow: var(--shadow-medium),inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    box-shadow: 
+        var(--shadow-medium),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
 .gradient-3 {
     background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
     color: white;
     border: 1px solid rgba(255, 255, 255, 0.3);
-    box-shadow: var(--shadow-medium),inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    box-shadow: 
+        var(--shadow-medium),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
 /* 二维码区域 */
 .qr-section {
     text-align: center;
     position: relative;
-    z-index: 2;
+    z-index: 1;
 }
 
 .qr-container {
-    background: linear-gradient(135deg, rgba(255,255,255,0.95), rgba(248,250,252,0.9));
+    background: linear-gradient(135deg, 
+        rgba(255, 255, 255, 0.95) 0%, 
+        rgba(248, 250, 252, 0.9) 100%);
     backdrop-filter: blur(16px);
     border-radius: 20px;
     padding: 36px;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.12),0 4px 16px rgba(99,102,241,0.08),inset 0 1px 0 rgba(255,255,255,0.8);
+    box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.12),
+        0 4px 16px rgba(99, 102, 241, 0.08),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
     border: 1px solid rgba(255, 255, 255, 0.4);
     transition: var(--transition);
     position: relative;
@@ -376,10 +416,22 @@ body::before {
 }
 
 @keyframes containerGlow {
-    0%, 100% { box-shadow: 0 8px 32px rgba(0,0,0,0.12),0 4px 16px rgba(99,102,241,0.08),inset 0 1px 0 rgba(255,255,255,0.8); }
-    50% { box-shadow: 0 12px 40px rgba(0,0,0,0.15),0 6px 24px rgba(99,102,241,0.15),0 2px 8px rgba(236,72,153,0.1),inset 0 1px 0 rgba(255,255,255,0.9); }
+    0%, 100% { 
+        box-shadow: 
+            0 8px 32px rgba(0, 0, 0, 0.12),
+            0 4px 16px rgba(99, 102, 241, 0.08),
+            inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    }
+    50% { 
+        box-shadow: 
+            0 12px 40px rgba(0, 0, 0, 0.15),
+            0 6px 24px rgba(99, 102, 241, 0.15),
+            0 2px 8px rgba(236, 72, 153, 0.1),
+            inset 0 1px 0 rgba(255, 255, 255, 0.9);
+    }
 }
 
+/* 二维码容器光效 */
 .qr-container::before {
     content: '';
     position: absolute;
@@ -387,7 +439,10 @@ body::before {
     left: -2px;
     right: -2px;
     bottom: -2px;
-    background: linear-gradient(45deg, var(--primary-color), var(--accent-color), #00f2fe);
+    background: linear-gradient(45deg, 
+        var(--primary-color), 
+        var(--accent-color), 
+        #00f2fe);
     border-radius: 20px;
     opacity: 0.2;
     animation: borderPulse 3s ease-in-out infinite;
@@ -407,9 +462,12 @@ body::before {
 
 .qr-container:hover {
     transform: translateY(-4px) scale(1.02);
-    box-shadow: 0 16px 48px rgba(0,0,0,0.18),inset 0 1px 0 rgba(255,255,255,0.9);
+    box-shadow: 
+        0 16px 48px rgba(0, 0, 0, 0.18),
+        inset 0 1px 0 rgba(255, 255, 255, 0.9);
 }
 
+/* 二维码图片样式 */
 .qr-code {
     position: relative;
     display: inline-block;
@@ -417,21 +475,39 @@ body::before {
     background: linear-gradient(135deg, #ffffff, #f8fafc);
     border-radius: 14px;
     border: 2px solid rgba(37, 99, 235, 0.1);
-    box-shadow: inset 0 2px 4px rgba(0,0,0,0.05),0 4px 12px rgba(37,99,235,0.15),0 2px 8px rgba(0,0,0,0.05);
+    box-shadow: 
+        inset 0 2px 4px rgba(0, 0, 0, 0.05),
+        0 4px 12px rgba(37, 99, 235, 0.15),
+        0 2px 8px rgba(0, 0, 0, 0.05);
     margin-bottom: 24px;
     transition: var(--transition);
     animation: qrGlow 4s ease-in-out infinite;
 }
 
 @keyframes qrGlow {
-    0%, 100% { box-shadow: inset 0 2px 4px rgba(0,0,0,0.05),0 4px 12px rgba(37,99,235,0.15),0 2px 8px rgba(0,0,0,0.05); border-color: rgba(37,99,235,0.1); }
-    50% { box-shadow: inset 0 2px 4px rgba(0,0,0,0.08),0 6px 20px rgba(37,99,235,0.25),0 4px 12px rgba(37,99,235,0.1); border-color: rgba(37,99,235,0.2); }
+    0%, 100% { 
+        box-shadow: 
+            inset 0 2px 4px rgba(0, 0, 0, 0.05),
+            0 4px 12px rgba(37, 99, 235, 0.15),
+            0 2px 8px rgba(0, 0, 0, 0.05);
+        border-color: rgba(37, 99, 235, 0.1);
+    }
+    50% { 
+        box-shadow: 
+            inset 0 2px 4px rgba(0, 0, 0, 0.08),
+            0 6px 20px rgba(37, 99, 235, 0.25),
+            0 4px 12px rgba(37, 99, 235, 0.1);
+        border-color: rgba(37, 99, 235, 0.2);
+    }
 }
 
 .qr-code:hover {
     transform: scale(1.05);
     border-color: rgba(37, 99, 235, 0.3);
-    box-shadow: inset 0 2px 4px rgba(0,0,0,0.08),0 8px 24px rgba(37,99,235,0.3),0 4px 16px rgba(0,0,0,0.1);
+    box-shadow: 
+        inset 0 2px 4px rgba(0, 0, 0, 0.08),
+        0 8px 24px rgba(37, 99, 235, 0.3),
+        0 4px 16px rgba(0, 0, 0, 0.1);
     animation: qrGlow 2s ease-in-out infinite;
 }
 
@@ -449,12 +525,14 @@ body::before {
     position: relative;
 }
 
+/* 添加装饰性小图标 */
 .qr-text::before {
     content: '📱';
     margin-right: 8px;
     font-size: 1rem;
 }
 
+/* 二维码描述文字 */
 .qr-description {
     font-size: 0.8rem;
     color: var(--text-muted);
@@ -463,7 +541,7 @@ body::before {
     line-height: 1.4;
 }
 
-/* 工具栏 */
+/* 工具栏升级 */
 .toolbar {
     position: fixed;
     bottom: 24px;
@@ -532,7 +610,7 @@ body::before {
     z-index: 1;
 }
 
-/* 模态框 */
+/* 模态框升级 */
 .modal {
     display: none;
     position: fixed;
@@ -570,8 +648,14 @@ body::before {
 }
 
 @keyframes modalSlideUp {
-    from { opacity: 0; transform: translateY(20px) scale(0.95); }
-    to { opacity: 1; transform: translateY(0) scale(1); }
+    from { 
+        opacity: 0; 
+        transform: translateY(20px) scale(0.95); 
+    }
+    to { 
+        opacity: 1; 
+        transform: translateY(0) scale(1); 
+    }
 }
 
 .modal-header {
@@ -644,31 +728,108 @@ body::before {
     box-shadow: var(--shadow-medium);
 }
 
-/* 响应式适配 */
+/* 中等屏幕响应式 */
 @media (max-width: 640px) {
-    .container { max-width: 480px; }
-    .profile-container { padding: 44px 40px; }
-    .main-link { padding: 21px 26px; }
-    .qr-container { padding: 34px; }
+    .container {
+        max-width: 100%;
+    }
+    
+    .profile-container {
+        padding: 44px 40px;
+    }
 }
 
+/* 小屏幕响应式 */
 @media (max-width: 580px) {
-    .container { max-width: 420px; padding: 16px; }
-    .profile-container { padding: 32px 28px; margin-bottom: 100px; }
-    .toolbar { bottom: 16px; padding: 12px 16px; }
-    .profile-stats { flex-direction: column; gap: 20px; padding: 18px 16px; }
-    .main-link { padding: 20px 24px; }
-    .modal-content { padding: 28px; margin: 20px; }
-    .qr-container { padding: 28px; border-radius: 16px; }
-    .qr-container:hover { transform: translateY(-2px) scale(1.01); }
-    .qr-code { padding: 10px; margin-bottom: 18px; border-radius: 12px; }
+    .container {
+        max-width: 100%;
+        padding: 0;
+    }
+    
+    .profile-container {
+        padding: 32px 28px;
+        margin: 0;
+        min-height: 100vh;
+    }
+    
+    .toolbar {
+        bottom: 16px;
+        padding: 12px 16px;
+    }
+    
+    .profile-stats {
+        flex-direction: column;
+        gap: 20px;
+        padding: 18px 16px;
+    }
+    
+    .main-link {
+        padding: 20px 24px;
+    }
+    
+    .modal-content {
+        padding: 28px;
+        margin: 20px;
+    }
+    
+    .qr-container {
+        padding: 28px;
+        border-radius: 16px;
+    }
+    
+    .qr-container:hover {
+        transform: translateY(-2px) scale(1.01);
+    }
+    
+    .qr-code {
+        padding: 10px;
+        margin-bottom: 18px;
+        border-radius: 12px;
+    }
 }
 
-/* 滚动条/选中文本/全局动画 */
-::-webkit-scrollbar { width: 8px; }
-::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: linear-gradient(135deg, var(--primary-color), var(--accent-color)); border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-::-webkit-scrollbar-thumb:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.2); }
-::selection { background: linear-gradient(135deg, var(--primary-color), var(--accent-color)); color: white; }
-* { scroll-behavior: smooth; }
-@keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+/* 滚动条升级 */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* 选中文本样式 */
+::selection {
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    color: white;
+}
+
+/* 全局动画优化 */
+* {
+    scroll-behavior: smooth;
+}
+
+/* 加载动画 */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.profile-container {
+    animation: fadeInUp 0.8s ease-out;
+}
