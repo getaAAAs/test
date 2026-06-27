@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <!-- 强制手机竖屏、禁止缩放、仅移动端适配核心标签 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>竖屏图文资讯</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            background: #121212;
+            color: #fff;
+            overflow-x: hidden;
+        }
+        /* PC端拦截提示，宽度大于768px直接隐藏内容 */
+        @media screen and (min-width: 768px) {
+            .mobile-wrap {
+                display: none !important;
+            }
+            .pc-tip {
+                display: flex !important;
+            }
+        }
+        .pc-tip {
+            display: none;
+            width: 100vw;
+            height: 100vh;
+            background: #000;
+            color: #fff;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            text-align: center;
+            padding: 20px;
+        }
+        /* 移动端容器 */
+        .mobile-wrap {
+            min-height: 100vh;
+        }
+        /* 顶部大标题栏 */
+        .top-header {
+            position: sticky;
+            top: 0;
+            width: 100%;
+            background: #1a1a1a;
+            padding: 24px 16px;
+            border-bottom: 1px solid #333;
+            z-index: 99;
+        }
+        .top-header h1 {
+            font-size: 28px;
+            font-weight: bold;
+            color: #ffffff;
+        }
+        /* 资讯列表容器 */
+        .news-list {
+            padding: 16px;
+            padding-bottom: 80px;
+        }
+        /* 单条图文卡片 */
+        .news-item {
+            background: #1e1e1e;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+        .news-item-img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            display: block;
+        }
+        .news-item-title {
+            padding: 14px 16px;
+            font-size: 18px;
+            line-height: 1.5;
+            color: #f0f0f0;
+        }
+        /* 详情页（纯黑主题，默认隐藏） */
+        .detail-page {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: #000000; /* 图2纯黑色主题 */
+            overflow-y: auto;
+            display: none;
+            padding: 20px 16px;
+        }
+        .detail-back {
+            font-size: 16px;
+            color: #999;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+        .detail-title {
+            font-size: 24px;
+            margin-bottom: 20px;
+            line-height: 1.4;
+        }
+        .detail-img {
+            width: 100%;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        .detail-content p {
+            font-size: 17px;
+            line-height: 1.7;
+            color: #ddd;
+            margin-bottom: 16px;
+        }
+    </style>
+</head>
+<body>
+    <!-- PC电脑访问提示 -->
+    <div class="pc-tip">
+        请使用手机竖屏浏览器打开本网站，电脑端暂不支持访问
+    </div>
+
+    <!-- 手机端主页面：图文列表 -->
+    <div class="mobile-wrap">
+        <!-- 顶部大标题区域 -->
+        <div class="top-header">
+            <h1>资讯头条大标题</h1>
+        </div>
+
+        <!-- 图文列表，每条=标题+图片 -->
+        <div class="news-list">
+            <!-- 文章1 -->
+            <div class="news-item" onclick="openDetail(1)">
+                <img class="news-item-img" src="https://picsum.photos/id/1001/750/440" alt="配图">
+                <div class="news-item-title">瘫痪嫁法国老头真相大白11个月，42岁李宇春近况曝光，状态太意外</div>
+            </div>
+            <!-- 文章2 -->
+            <div class="news-item" onclick="openDetail(2)">
+                <img class="news-item-img" src="https://picsum.photos/id/1003/750/440" alt="配图">
+                <div class="news-item-title">2026高考志愿填报指南来了！填报技巧一次性讲清</div>
+            </div>
+            <!-- 文章3 -->
+            <div class="news-item" onclick="openDetail(3)">
+                <img class="news-item-img" src="https://picsum.photos/id/1015/750/440" alt="配图">
+                <div class="news-item-title">四川：“雪山草地”新跨越，乡村振兴全新进展</div>
+            </div>
+        </div>
+
+        <!-- 详情页：纯黑色背景（对应你图2深色主题） -->
+        <div class="detail-page" id="detailBox">
+            <div class="detail-back" onclick="closeDetail()">← 返回列表</div>
+            <h2 class="detail-title" id="detailTitle">文章标题</h2>
+            <img class="detail-img" id="detailImg" src="" alt="详情大图">
+            <div class="detail-content" id="detailText">
+                <p>这里是文章正文内容，纯黑色背景，白色文字，竖屏上下滑动浏览，完全匹配你第二张图的深色全黑主题。</p>
+                <p>页面只能手机竖屏打开，电脑浏览器访问会直接提示不支持，所有布局都是垂直上下滑动，没有横向内容。</p>
+                <p>排版类似Word文档，图片+文字分段展示，顶部有返回按钮回到图文列表首页。</p>
+                <p>多段文字自动换行，行高宽松阅读舒适，深色护眼黑色主题。</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 模拟文章数据，可无限新增
+        const articleData = {
+            1: {
+                title: "瘫痪嫁法国老头真相大白11个月，42岁李宇春近况曝光，状态太意外",
+                img: "https://picsum.photos/id/1001/750/1400",
+                text: `<p>正文第一段内容，适配纯黑深色页面，竖屏滑动阅读。</p>
+                <p>所有图片自适应手机宽度，不会超出屏幕，文字自动分行。</p>
+                <p>页面背景完全纯黑，和你提供第二张截图颜色一致。</p>`
+            },
+            2: {
+                title: "2026高考志愿填报指南来了！填报技巧一次性讲清",
+                img: "https://picsum.photos/id/1003/750/1400",
+                text: `<p>高考志愿填报完整攻略，图文结合排版。</p><p>深色黑色背景阅读护眼，手机竖屏完美适配。</p>`
+            },
+            3: {
+                title: "四川：“雪山草地”新跨越，乡村振兴全新进展",
+                img: "https://picsum.photos/id/1015/750/1400",
+                text: `<p>四川发展相关资讯正文，分段排版类似Word文档。</p>`
+            }
+        }
+
+        // 打开详情页
+        function openDetail(id) {
+            const data = articleData[id];
+            document.getElementById('detailTitle').innerText = data.title;
+            document.getElementById('detailImg').src = data.img;
+            document.getElementById('detailText').innerHTML = data.text;
+            document.getElementById('detailBox').style.display = 'block';
+            // 滚动置顶
+            document.getElementById('detailBox').scrollTop = 0;
+        }
+        // 关闭详情返回列表
+        function closeDetail() {
+            document.getElementById('detailBox').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
