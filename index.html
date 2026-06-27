@@ -68,6 +68,7 @@
             border-radius: 12px;
             margin-bottom: 20px;
             overflow: hidden;
+            cursor: pointer; /* 整块悬浮显示手型，图片+标题都可点击 */
         }
         .news-item-img {
             width: 100%;
@@ -88,7 +89,7 @@
             left: 0;
             width: 100%;
             height: 100vh;
-            background: #000000; /* 图2纯黑色主题 */
+            background: #000000; /* 纯黑色深色主题 */
             overflow-y: auto;
             display: none;
             padding: 20px 16px;
@@ -130,72 +131,80 @@
             <h1>2000+网红资讯头条</h1>
         </div>
 
-        <!-- 图文列表，每条=标题+图片 -->
+        <!-- 图文列表，本地图片读取仓库根目录 1.jpg/2.jpg/3.jpg -->
         <div class="news-list">
-            <!-- 文章1 -->
-            <div class="news-item" onclick="openDetail(1)">
-                <img class="news-item-img" src="https://picsum.photos/id/1001/750/440" alt="配图">
+            <!-- 第1组：本地图片1.jpg，点击图片/标题跳转链接1 -->
+            <div class="news-item" onclick="jumpLink(1)">
+                <img class="news-item-img" src="./1.jpg" alt="配图1">
                 <div class="news-item-title">800+网红视频流出合集</div>
             </div>
-            <!-- 文章2 -->
-            <div class="news-item" onclick="openDetail(2)">
-                <img class="news-item-img" src="https://picsum.photos/id/1003/750/440" alt="配图">
+            <!-- 第2组：本地图片2.jpg，点击图片/标题跳转链接2 -->
+            <div class="news-item" onclick="jumpLink(2)">
+                <img class="news-item-img" src="./2.jpg" alt="配图2">
                 <div class="news-item-title">800+网红视频流出合集</div>
             </div>
-            <!-- 文章3 -->
-            <div class="news-item" onclick="openDetail(3)">
-                <img class="news-item-img" src="https://picsum.photos/id/1015/750/440" alt="配图">
+            <!-- 第3组：本地图片3.jpg，点击图片/标题跳转链接3 -->
+            <div class="news-item" onclick="jumpLink(3)">
+                <img class="news-item-img" src="./3.jpg" alt="配图3">
                 <div class="news-item-title">800+网红视频流出合集</div>
             </div>
         </div>
 
-        <!-- 详情页：纯黑色背景（对应你图2深色主题） -->
+        <!-- 详情页：纯黑色背景 -->
         <div class="detail-page" id="detailBox">
             <div class="detail-back" onclick="closeDetail()">← 返回列表</div>
             <h2 class="detail-title" id="detailTitle">文章标题</h2>
             <img class="detail-img" id="detailImg" src="" alt="详情大图">
             <div class="detail-content" id="detailText">
-                <p>这里是文章正文内容，纯黑色背景，白色文字，竖屏上下滑动浏览，完全匹配你第二张图的深色全黑主题。</p>
-                <p>页面只能手机竖屏打开，电脑浏览器访问会直接提示不支持，所有布局都是垂直上下滑动，没有横向内容。</p>
-                <p>排版类似Word文档，图片+文字分段展示，顶部有返回按钮回到图文列表首页。</p>
-                <p>多段文字自动换行，行高宽松阅读舒适，深色护眼黑色主题。</p>
+                <p>这里是文章正文内容，纯黑色背景，白色文字，竖屏上下滑动浏览。</p>
+                <p>页面仅支持手机竖屏打开，电脑访问会弹出拦截提示。</p>
+                <p>排版类似Word文档，图文分段宽松，深色护眼模式。</p>
             </div>
         </div>
     </div>
 
     <script>
-        // 模拟文章数据，可无限新增
+        // =====================【修改跳转链接位置，对应3组图文】=====================
+        const linkList = {
+            1: "https://link1.example.com", // 第1组(1.jpg)跳转地址
+            2: "https://link2.example.com", // 第2组(2.jpg)跳转地址
+            3: "https://link3.example.com"  // 第3组(3.jpg)跳转地址
+        };
+        // =====================================================================
+
+        // 跳转函数：新标签页打开链接
+        function jumpLink(num) {
+            window.open(linkList[num], "_blank");
+            // 当前页面跳转替换上面：window.location.href = linkList[num];
+        }
+
+        // 备用文章数据（保留不删除）
         const articleData = {
             1: {
                 title: "瘫痪嫁法国老头真相大白11个月，42岁李宇春近况曝光，状态太意外",
-                img: "https://picsum.photos/id/1001/750/1400",
-                text: `<p>正文第一段内容，适配纯黑深色页面，竖屏滑动阅读。</p>
-                <p>所有图片自适应手机宽度，不会超出屏幕，文字自动分行。</p>
-                <p>页面背景完全纯黑，和你提供第二张截图颜色一致。</p>`
+                img: "./1.jpg",
+                text: `<p>正文第一段内容，适配纯黑深色页面，竖屏滑动阅读。</p>`
             },
             2: {
                 title: "2026高考志愿填报指南来了！填报技巧一次性讲清",
-                img: "https://picsum.photos/id/1003/750/1400",
-                text: `<p>高考志愿填报完整攻略，图文结合排版。</p><p>深色黑色背景阅读护眼，手机竖屏完美适配。</p>`
+                img: "./2.jpg",
+                text: `<p>高考志愿填报完整攻略，图文结合排版。</p>`
             },
             3: {
                 title: "四川：“雪山草地”新跨越，乡村振兴全新进展",
-                img: "https://picsum.photos/id/1015/750/1400",
+                img: "./3.jpg",
                 text: `<p>四川发展相关资讯正文，分段排版类似Word文档。</p>`
             }
         }
 
-        // 打开详情页
         function openDetail(id) {
             const data = articleData[id];
             document.getElementById('detailTitle').innerText = data.title;
             document.getElementById('detailImg').src = data.img;
             document.getElementById('detailText').innerHTML = data.text;
             document.getElementById('detailBox').style.display = 'block';
-            // 滚动置顶
             document.getElementById('detailBox').scrollTop = 0;
         }
-        // 关闭详情返回列表
         function closeDetail() {
             document.getElementById('detailBox').style.display = 'none';
         }
