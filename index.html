@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <!-- 强制手机竖屏、禁止缩放、仅移动端适配核心标签 -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>20000+全网热门网红不雅视频流出每日持续更新中....</title>
+    <title>2000+网红视频流出</title>
     <style>
         * {
             margin: 0;
@@ -31,7 +31,7 @@
             width: 100vw;
             height: 100vh;
             background: #000;
-            color: #fff;
+            color: #fff; /* 电脑提示文字颜色 */
             align-items: center;
             justify-content: center;
             font-size: 18px;
@@ -53,9 +53,9 @@
             z-index: 99;
         }
         .top-header h1 {
-            font-size: 24px;
+            font-size: 28px;
             font-weight: bold;
-            color: #ff4444;
+            color: #ffffff; /* 顶部大标题文字颜色 */
         }
         /* 资讯列表容器 */
         .news-list {
@@ -82,7 +82,7 @@
             padding: 14px 16px;
             font-size: 18px;
             line-height: 1.5;
-            color: #f0f0f0;
+            color: #f0f0f0; /* 卡片标题文字颜色 */
         }
         /* 详情页（纯黑主题，默认隐藏） */
         .detail-page {
@@ -98,7 +98,7 @@
         }
         .detail-back {
             font-size: 16px;
-            color: #999;
+            color: #999; /* 返回文字颜色 */
             margin-bottom: 20px;
             display: inline-block;
         }
@@ -106,6 +106,7 @@
             font-size: 24px;
             margin-bottom: 20px;
             line-height: 1.4;
+            color: #fff; /* 详情页标题颜色 */
         }
         .detail-img {
             width: 100%;
@@ -115,7 +116,7 @@
         .detail-content p {
             font-size: 17px;
             line-height: 1.7;
-            color: #ddd;
+            color: #ddd; /* 详情正文文字颜色 */
             margin-bottom: 16px;
         }
     </style>
@@ -128,35 +129,36 @@
 
     <!-- 手机端主页面：图文列表 -->
     <div class="mobile-wrap">
-        <!-- 顶部大标题区域 -->
+        <!-- 顶部大标题区域（自带换行） -->
         <div class="top-header">
-            <h1>全网20000+热门网红不雅视频资讯<br>未满🔞请立即离开</h1>
+            <h1>全网20000+热门网红视频<br>资讯合集</h1>
         </div>
-        <!-- 图文列表，本地图片读取仓库根目录 1.jpg/2.jpg/3.jpg -->
+
+        <!-- 图文列表5组，图片src统一用JS外部链接填充 -->
         <div class="news-list">
-            <!-- 第1组：本地图片1.jpg，点击图片/标题跳转链接1 -->
+            <!-- 第1组 -->
             <div class="news-item" onclick="jumpLink(1)">
-                <img class="news-item-img" src="./1.jpg" alt="配图1">
-                <div class="news-item-title">🔝点图直达---童铜锣.是小朱啊.800+网红不雅视频流出合集</div>
-            </div>
-            <!-- 第2组：本地图片2.jpg，点击图片/标题跳转链接2 -->
-            <div class="news-item" onclick="jumpLink(2)">
-                <img class="news-item-img" src="./2.jpg" alt="配图2">
-                <div class="news-item-title">🔝点图直达---娜娜.XX..800+网红不雅视频流出合集</div>
-            </div>
-            <!-- 第3组：本地图片3.jpg，点击图片/标题跳转链接3 -->
-            <div class="news-item" onclick="jumpLink(3)">
-                <img class="news-item-img" src="./3.jpg" alt="配图3">
-                <div class="news-item-title">🔝点图直达---热门网红COSer不雅视频流出1200+合集</div>
-            </div>
-                        <!-- 第4组：本地图片4.jpg，点击图片/标题跳转链接4【新增】 -->
-            <div class="news-item" onclick="jumpLink(4)">
-                <img class="news-item-img" src="./4.jpg" alt="配图4">
+                <img class="news-item-img" id="img1" alt="配图1">
                 <div class="news-item-title">800+网红视频流出合集</div>
             </div>
-            <!-- 第5组：本地图片5.jpg，点击图片/标题跳转链接5【新增】 -->
+            <!-- 第2组 -->
+            <div class="news-item" onclick="jumpLink(2)">
+                <img class="news-item-img" id="img2" alt="配图2">
+                <div class="news-item-title">800+网红视频流出合集</div>
+            </div>
+            <!-- 第3组 -->
+            <div class="news-item" onclick="jumpLink(3)">
+                <img class="news-item-img" id="img3" alt="配图3">
+                <div class="news-item-title">800+网红视频流出合集</div>
+            </div>
+            <!-- 第4组 -->
+            <div class="news-item" onclick="jumpLink(4)">
+                <img class="news-item-img" id="img4" alt="配图4">
+                <div class="news-item-title">800+网红视频流出合集</div>
+            </div>
+            <!-- 第5组 -->
             <div class="news-item" onclick="jumpLink(5)">
-                <img class="news-item-img" src="./5.jpg" alt="配图5">
+                <img class="news-item-img" id="img5" alt="配图5">
                 <div class="news-item-title">800+网红视频流出合集</div>
             </div>
         </div>
@@ -175,15 +177,34 @@
     </div>
 
     <script>
-        // =====================【修改跳转链接位置，对应3组图文】=====================
+        // =====================【1、修改每组外部图片链接，这里全部替换】=====================
+        const imgUrlList = {
+            1: "https://i.postimg.cc/Vk9sK2mw/2.jpg", // 第1张外部图链接
+            2: "https://i.postimg.cc/7Z1PKjwr/1.jpg", // 第2张外部图链接
+            3: "https://i.postimg.cc/K87c0CxF/3.jpg", // 第3张外部图链接
+            4: "https://i.postimg.cc/5259sDbb/4.jpg", // 第4张外部图链接
+            5: "https://i.postimg.cc/wj5xwng9/5.jpg"  // 第5张外部图链接
+        };
+        // =============================================================================
+
+        // =====================【2、修改每组跳转外链，这里替换网址】=====================
         const linkList = {
-            1: "https://pan.xunlei.com/s/VOw7_10a15kgvDTp_tVjHUI8A1?pwd=7yj7#", // 第1组(1.jpg)跳转地址
-            2: "https://pan.xunlei.com/s/VOw7_10auvf4cV5zx_0v0-s5A1?pwd=qfxb#", // 第2组(2.jpg)跳转地址
-            3: "https://pan.xunlei.com/s/VOw7_10fnE6kLtLMwqeGyEzcA1?pwd=9wsv#"  // 第3组(3.jpg)跳转地址
-            4: "https://link4.example.com", // 第4组(4.jpg)跳转地址【新增】
-            5: "https://link5.example.com"  // 第5组(5.jpg)跳转地址【新增】
+            1: "https://link1.example.com", // 第1组跳转地址
+            2: "https://link2.example.com", // 第2组跳转地址
+            3: "https://link3.example.com", // 第3组跳转地址
+            4: "https://link4.example.com", // 第4组跳转地址
+            5: "https://link5.example.com"  // 第5组跳转地址
         };
         // =====================================================================
+
+        // 页面加载自动赋值外部图片
+        window.onload = function(){
+            document.getElementById("img1").src = imgUrlList[1];
+            document.getElementById("img2").src = imgUrlList[2];
+            document.getElementById("img3").src = imgUrlList[3];
+            document.getElementById("img4").src = imgUrlList[4];
+            document.getElementById("img5").src = imgUrlList[5];
+        }
 
         // 跳转函数：新标签页打开链接
         function jumpLink(num) {
@@ -191,22 +212,32 @@
             // 当前页面跳转替换上面：window.location.href = linkList[num];
         }
 
-        // 备用文章数据（保留不删除）
+        // 备用文章数据
         const articleData = {
             1: {
                 title: "瘫痪嫁法国老头真相大白11个月，42岁李宇春近况曝光，状态太意外",
-                img: "./1.jpg",
+                img: imgUrlList[1],
                 text: `<p>正文第一段内容，适配纯黑深色页面，竖屏滑动阅读。</p>`
             },
             2: {
                 title: "2026高考志愿填报指南来了！填报技巧一次性讲清",
-                img: "./2.jpg",
+                img: imgUrlList[2],
                 text: `<p>高考志愿填报完整攻略，图文结合排版。</p>`
             },
             3: {
                 title: "四川：“雪山草地”新跨越，乡村振兴全新进展",
-                img: "./3.jpg",
+                img: imgUrlList[3],
                 text: `<p>四川发展相关资讯正文，分段排版类似Word文档。</p>`
+            },
+            4: {
+                title: "第4条资讯标题，自行修改",
+                img: imgUrlList[4],
+                text: `<p>第4条资讯正文，可自由编辑。</p>`
+            },
+            5: {
+                title: "第5条资讯标题，自行修改",
+                img: imgUrlList[5],
+                text: `<p>第5条资讯正文，可自由编辑。</p>`
             }
         }
 
