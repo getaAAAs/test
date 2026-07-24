@@ -98,7 +98,7 @@
         }
         .card:hover { box-shadow:var(--shadow-lg); transform:translateY(-1px); }
         .card.primary-card { border:2px solid #e8d5f5; background:linear-gradient(180deg, #fefcff 0%, #fdf8fc 100%); box-shadow:var(--shadow-lg), 0 0 0 1px rgba(124,58,237,0.06); }
-        .card.primary-card::before { content:'🔝 重磅推荐全部Coser、网红、总链接'; position:absolute; top:-11px; left:20px; background:#7c3aed; color:#fff; font-size:0.7rem; font-weight:700; padding:3px 12px; border-radius:20px; letter-spacing:0.04em; z-index:2; box-shadow:0 2px 8px rgba(124,58,237,0.3); }
+        .card.primary-card::before { content:'🔝 重磅推荐Coser、网红、玉足、总链接'; position:absolute; top:-11px; left:20px; background:#7c3aed; color:#fff; font-size:0.7rem; font-weight:700; padding:3px 12px; border-radius:20px; letter-spacing:0.04em; z-index:2; box-shadow:0 2px 8px rgba(124,58,237,0.3); }
         .card.tutorial-card { border:2px solid #fcd5d5; background:linear-gradient(180deg, #fffbfb 0%, #fff8f7 100%); box-shadow:var(--shadow-md), 0 0 0 1px rgba(232,97,140,0.05); }
         .card.tutorial-card::before { content:'⚠️ 新人必看教程'; position:absolute; top:-11px; left:20px; background:#e8618c; color:#fff; font-size:0.7rem; font-weight:700; padding:3px 12px; border-radius:20px; letter-spacing:0.04em; z-index:2; box-shadow:0 2px 8px rgba(232,97,140,0.3); }
 
@@ -350,7 +350,7 @@
      🔝
     </button>
     <span class="nav-label">
-     顶部
+     回到<br>顶部
     </span>
    </div>
    <div class="nav-item">
@@ -358,15 +358,23 @@
      📋
     </button>
     <span class="nav-label">
-     更新
+     近期<br>更新
     </span>
    </div>
    <div class="nav-item">
-    <button aria-label="直达总链接" class="float-nav-btn" data-target="main-links">
+    <button aria-label="回到顶部" class="float-nav-btn" data-target="hot-yz">
      🔗
     </button>
     <span class="nav-label">
-     总链
+     玉足
+    </span>
+   </div>
+      <div class="nav-item">
+    <button aria-label="抖音网红" class="float-nav-btn" data-target="hot-links">
+     🔗
+    </button>
+    <span class="nav-label">
+     抖音<br>网红
     </span>
    </div>
   </nav>
@@ -471,13 +479,6 @@
        请牢记防止失联
       </span>
      </div>
-     <div class="site-ref" style="margin-top:6px;text-align:left;">
-      📖 文档直达浏览器地址：
-      <a href="http://tp34.cn" rel="noopener noreferrer" target="_blank">
-       tp34.cn
-      </a>
-      （浏览器直接搜即可）
-     </div>
     </div>
    </div>
    <!-- ========== 2. 教程卡片（默认折叠） ========== -->
@@ -554,7 +555,7 @@
      📋 更新内容列表
     </span>
     <span class="count-badge">
-     共16期
+     20000+资源逐步更新中.....
     </span>
     <span class="line">
     </span>
@@ -676,7 +677,6 @@
      🖼️ 点我收起预览
     </button>
     <div class="preview-gallery" style="display:block;">
-     <img alt="预览图片" loading="lazy" onclick="openGallery(this)" src="https://img.xiurenwang.com.cn/wp-content/uploads/2025/04/1749447692-09590823d877ee3.png"/>
      <img alt="预览图片" loading="lazy" onclick="openGallery(this)" src="https://img.xiurenwang.com.cn/wp-content/uploads/2025/04/1749213842-8f13426e5e1019e.png"/>
      <img alt="预览图片" loading="lazy" onclick="openGallery(this)" src="https://img.xiurenwang.com.cn/wp-content/uploads/2025/04/1749447712-8cdd491bec5bb5c.png"/>
      <img alt="预览图片" loading="lazy" onclick="openGallery(this)" src="https://img.xiurenwang.com.cn/wp-content/uploads/2025/04/1749472693-6e70ec35054cf1b.png"/>
@@ -1067,7 +1067,6 @@
     </button>
     <div class="preview-gallery" style="display:block;">
      <img alt="预览图片" loading="lazy" onclick="openGallery(this)" src="https://img.xiurenwang.com.cn/wp-content/uploads/2025/04/1749447686-c04b669605c95dd.png"/>
-     <img alt="预览图片" loading="lazy" onclick="openGallery(this)" src="https://img.xiurenwang.com.cn/wp-content/uploads/2025/04/1749472106-d3a80479403c8a4.png"/>
      <img alt="预览图片" loading="lazy" onclick="openGallery(this)" src="https://img.xiurenwang.com.cn/wp-content/uploads/2025/04/1749447763-9822a9e2a169a38.png"/>
      <img alt="预览图片" loading="lazy" onclick="openGallery(this)" src="https://img.xiurenwang.com.cn/wp-content/uploads/2025/04/1749447706-40aa6f78ff04940.png"/>
      <img alt="预览图片" loading="lazy" onclick="openGallery(this)" src="https://img.xiurenwang.com.cn/wp-content/uploads/2025/04/1749213797-6b7f2fca8ac69ad.png"/>
@@ -1169,6 +1168,62 @@
      <img alt="预览图片" loading="lazy" onclick="openGallery(this)" src="https://img.xiurenwang.com.cn/wp-content/uploads/2025/06/1749019878-e9a2ba7268be7ea.png"/>
     </div>
    </article>
+      <!-- ========== 1. 总链接卡片（默认展开） ========== -->
+   <div class="card primary-card" id="hot-links">
+    <div class="card-title" onclick="toggleCollapse(this)">
+     <span class="icon">
+      🔗
+     </span>
+     热门网红童锣烧、小霞佩奇等
+     <span class="toggle-indicator open">
+      ▼
+     </span>
+    </div>
+    <div class="collapse-content">
+     <div class="link-row">
+      <span class="link-label">
+       📥 迅雷链接
+      </span>
+      <a href="https://pan.xunlei.com/s/VOyII-5iSvv0JeoxqEEWuc5vA1?pwd=jwkn#" rel="noopener noreferrer" target="_blank">
+       https://pan.xunlei.com/s/VOyII-5iSvv0JeoxqEEWuc5vA1?pwd=jwkn#
+      </a>
+     </div>
+     <div style="display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:4px;">
+      <span style="font-weight:600;font-size:0.8rem;color:#5a3d8a;">
+       🔑 提取码：
+      </span>
+      <span class="pwd-tag" data-copy="jwkn">
+       jwkn
+      </span>
+      <span class="site-ref" style="margin-left:auto;">
+       网址：
+       <a href="http://tp34.cn" rel="noopener noreferrer" target="_blank">
+        tp34.cn
+       </a>
+       请牢记防止失联
+      </span>
+     </div>
+    </div>
+   </div>
+           <!-- ========== ★ 新增：热门网红卡片（独立 id="hot-links"） ========== -->
+        <div class="card primary-card" id="hot-yz">
+            <div class="card-title" onclick="toggleCollapse(this)">
+                <span class="icon">🔥</span>
+                Coser玉足脚丫子
+                <span class="toggle-indicator open">▼</span>
+            </div>
+            <div class="collapse-content">
+                <div class="link-row">
+                    <span class="link-label">📥 迅雷链接</span>
+                    <a href="https://pan.xunlei.com/s/VOyIHVlf_XTPk_un4fE2yheqA1?pwd=24nk#" rel="noopener noreferrer" target="_blank">https://pan.xunlei.com/s/VOyIHVlf_XTPk_un4fE2yheqA1?pwd=24nk#</a>
+                </div>
+                <div style="display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:4px;">
+                    <span style="font-weight:600;font-size:0.8rem;color:#5a3d8a;">🔑 提取码：</span>
+                    <span class="pwd-tag" data-copy="24nk">24nk</span>
+                    <span class="site-ref" style="margin-left:auto;">网址：<a href="http://tp34.cn" rel="noopener noreferrer" target="_blank">tp34.cn</a> 请牢记防止失联</span>
+                </div>
+            </div>
+        </div>
    <div class="footer-note">
     <p>
      <span class="heart">
