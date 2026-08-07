@@ -1,8 +1,8 @@
-// ========== 数据线路配置（用户可修改） ==========
+// ========== 数据线路配置 ==========
 const DATA_SOURCES = [
-    "https://cdn.jsdelivr.net/gh/getaAAAs/test@main/data.js",  // jsDelivr 加速
-    "https://u.pone.rs/lnbzirtg.js",                            // 图床备用
-    "data.js"                                                    // 本地备用
+    "https://cdn.jsdelivr.net/gh/getaAAAs/test@main/data.js",
+    "https://u.pone.rs/lnbzirtg.js",
+    "data.js"
 ];
 
 // ========== 注入全局 CSS ==========
@@ -30,10 +30,7 @@ const DATA_SOURCES = [
                 radial-gradient(ellipse at 85% 30%, rgba(124,58,237,0.03) 0%, transparent 55%),
                 radial-gradient(ellipse at 50% 70%, rgba(232,97,140,0.03) 0%, transparent 50%);
         }
-        .hero {
-            background: var(--header-bg); color:#fff; padding:28px 16px 26px; text-align:center; position:relative; overflow:hidden;
-            box-shadow:0 4px 24px rgba(15,15,40,0.25);
-        }
+        .hero { background: var(--header-bg); color:#fff; padding:28px 16px 26px; text-align:center; position:relative; overflow:hidden; box-shadow:0 4px 24px rgba(15,15,40,0.25); }
         .hero::before { content:''; position:absolute; top:-60px; right:-50px; width:180px; height:180px; background:radial-gradient(circle, rgba(232,97,140,0.25) 0%, transparent 70%); border-radius:50%; pointer-events:none; }
         .hero::after { content:''; position:absolute; bottom:-40px; left:-40px; width:140px; height:140px; background:radial-gradient(circle, rgba(124,58,237,0.2) 0%, transparent 70%); border-radius:50%; pointer-events:none; }
         .hero-content { position:relative; z-index:1; max-width:640px; margin:0 auto; }
@@ -156,14 +153,12 @@ const DATA_SOURCES = [
     document.head.appendChild(style);
 })();
 
-// ========== 主函数 initApp（由 index.html 调用） ==========
+// ========== 主函数 initApp ==========
 function initApp() {
-    // 先显示加载数据提示
     document.getElementById('loadingOverlay').style.display = 'flex';
     loadDataFromFirstSource();
 }
 
-// 数据加载逻辑
 let updateCardsData = [];
 const subStates = {};
 
@@ -207,7 +202,6 @@ function showDataFallbackUI() {
     html += '</div>';
     container.innerHTML = html;
 
-    // 绑定数据线路按钮
     container.querySelectorAll('.line-btn').forEach(btn => {
         btn.addEventListener('click', async function() {
             const url = this.dataset.url;
@@ -229,7 +223,7 @@ function showDataFallbackUI() {
     });
 }
 
-// ========== 构建完整页面（原 HTML 中的固定卡片 + 动态内容） ==========
+// ========== 构建完整页面（包含所有固定元素） ==========
 function buildPage() {
     // 移除可能存在的旧内容
     const existing = document.querySelector('.main-container');
@@ -325,21 +319,15 @@ function buildPage() {
         </div>
     </div>`;
 
-    // 将 mainHTML 插入到 body 中原 main-container 的位置（之前我们移除了旧的，需要插入）
-    // 因为我们之前完全动态生成，所以直接插入到 <body> 的第一个子元素位置（在底部导航之前）
-    // 注意：index.html 中已经存在底部导航、气泡、灯箱等固定元素，它们是在 body 中的独立节点，mainHTML 应插入到这些节点之后，但最好放在 body 末尾。
-    // 我们采用更简单方式：创建一个临时容器并插入到 body 末尾，然后所有动态卡片操作都使用这个容器。
+    // 插入到 body 末尾
     const temp = document.createElement('div');
     temp.innerHTML = mainHTML;
     while (temp.firstChild) {
         document.body.appendChild(temp.firstChild);
     }
 
-    // 重新绑定事件（因为之前的事件委托可能失效？我们已经在全局注册了委托，所以无需额外操作）
-    // 但需要确保动态卡片的容器正确，此处已经生成了 id="update-container"
     // 启动动态加载
     const container = document.getElementById('update-container');
-    if (!container) return;
     const sentinel = document.getElementById('load-more-sentinel');
     const LOAD_BATCH = 4;
     let loadedCount = 0, isLoading = false;
@@ -431,7 +419,6 @@ function buildPage() {
         if (btn) btn.textContent = `📂 查看全部子资源 (${updateCardsData[index].subCards.length}个)`;
     }
 
-    // 事件委托
     document.addEventListener('click', function(e) {
         const t = e.target;
         if (t.matches('.sub-page-btn')) {
@@ -459,17 +446,13 @@ function buildPage() {
         container.appendChild(frag);
         loadedCount += batch.length;
         isLoading = false;
-        // 由于 sub-load-btn 是新创建的，需要重新绑定事件吗？我们的事件委托已经处理了。
     }
 
     loadMoreCards();
     new IntersectionObserver((entries) => { if (entries[0].isIntersecting && !isLoading && loadedCount < updateCardsData.length) loadMoreCards(); }, { rootMargin: '200px' }).observe(sentinel);
-
-    // 通用功能（Toast, 复制, 折叠, 灯箱, 导航, 弹窗, 气泡）
-    // 这些功能已在下面独立定义，因为全局作用域。
 }
 
-// ========== 全局交互函数（原 HTML 中的各种功能） ==========
+// ========== 全局交互函数 ==========
 window.toggleCollapse = function(titleEl) {
     const card = titleEl.closest('.card, .qq-card');
     if (!card) return;
@@ -539,13 +522,21 @@ lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLigh
 document.addEventListener('keydown', (e) => { if (!lightbox.classList.contains('active')) return; if (e.key === 'ArrowLeft') { e.preventDefault(); if (curIdx > 0) showImage(curIdx - 1); } if (e.key === 'ArrowRight') { e.preventDefault(); if (curIdx < gallery.length - 1) showImage(curIdx + 1); } if (e.key === 'Escape') closeLightbox(); });
 
 // 底部导航
-document.querySelectorAll('.bottom-nav .nav-btn[data-target]').forEach(btn => {
-    btn.addEventListener('click', function(e) {
-        e.preventDefault();
-        const target = this.dataset.target === 'top' ? null : document.getElementById(this.dataset.target);
-        if (target) { target.scrollIntoView({ behavior: 'smooth', block: 'start' }); showToast('📌 已定位', 'success'); }
-        else { window.scrollTo({ top: 0, behavior: 'smooth' }); showToast('🔝 已回到顶部', 'success'); }
-    });
+document.addEventListener('click', function(e) {
+    const btn = e.target.closest('.bottom-nav .nav-btn[data-target]');
+    if (!btn) return;
+    e.preventDefault();
+    const targetId = btn.dataset.target;
+    if (targetId === 'top') {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        showToast('🔝 已回到顶部', 'success');
+    } else {
+        const target = document.getElementById(targetId);
+        if (target) {
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            showToast('📌 已定位', 'success');
+        }
+    }
 });
 
 // 弹窗
