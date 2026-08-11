@@ -1,8 +1,8 @@
 // ========== 数据线路配置 ==========
-const DATA_SOURCES = [
-  "https://u.pone.rs/llmxrqii.js",
-  "https://cdn.jsdelivr.net/gh/getaAAAs/test@main/data.js",
-  "data.js"
+const DATA_SOURCES = [	
+    "https://cdn.jsdelivr.net/gh/getaAAAs/test@main/data.js",
+	"https://u.pone.rs/llmxrqii.js",
+	"data.js"
 ];
 
 // ========== 全局子卡片生成函数 ==========
