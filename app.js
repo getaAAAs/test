@@ -2,7 +2,7 @@
 const DATA_SOURCES = [	
     "https://cdn.jsdelivr.net/gh/getaAAAs/test@main/data.js",
 	"https://u.pone.rs/llmxrqii.js",
-	"data.js"
+	"da1ta.js"
 ];
 
 // ========== 全局子卡片生成函数 ==========
