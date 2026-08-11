@@ -1,6 +1,6 @@
 // ========== 数据线路配置 ==========
 const DATA_SOURCES = [	
-    "https://cdn.jsdelivr.net/gh/getaAAAs/test@main/data.js?v=202608111",
+    "https://github.com/getaAAAs/test/blob/main/app.js",
 	"https://u.pone.rs/llmxrqii.js",
 	"da1ta.js"
 ];
