@@ -1,6 +1,6 @@
 // ========== 数据线路配置 ==========
 const DATA_SOURCES = [	
-	"https://u.pone.rs/kflidqdj.js",
+	"https://u.pone.rs/fgnpcbwd.js",
     "https://cdn.jsdelivr.net/gh/getaAAAs/test@main/data.js",
 	"data.js"
 ];
@@ -36,9 +36,15 @@ function createSubCardHTML(item, cardIndex, subIndex) {
 }
 
 // ========== 新增：生成平铺的三级子卡片HTML（用于搜索结果） ==========
+// 【修复】增加图片预览支持
 function createSubSubCardHTML(subSubItem) {
+    // 生成图片预览 HTML
+    const imgs = (subSubItem.images || []).map(src => `<img alt="预览" loading="lazy" onclick="openGallery(this)" src="${src}" />`).join('');
+    const previewHTML = imgs ? `<div class="preview-gallery" style="display:block;">${imgs}</div>` : '';
+
     return `<div class="sub-card" style="background:#f0edf7;">
         <div class="sub-card-header"><strong style="flex:1;">${subSubItem.name}</strong></div>
+        ${previewHTML}
         <div style="display:flex; justify-content:flex-end; align-items:center; gap:6px; margin-top:6px; flex-wrap:wrap;">
             <span style="color:red; font-weight:bold; font-size:0.75rem;">网站永久地址 tp34.cn 请牢记</span>
             <a href="https://pan.xunlei.com/s/VOzRp5FniqYezSeLudryWJ1TA1?pwd=nkm8#" target="_blank" style="background:#7c3aed; color:#fff; padding:6px 10px; border-radius:16px; font-size:0.75rem; text-decoration:none; font-weight:600;">解压教程</a>
@@ -47,7 +53,6 @@ function createSubSubCardHTML(subSubItem) {
         </div>
     </div>`;
 }
-
 // ========== 注入全局 CSS ==========
 (function injectCSS() {
     const style = document.createElement('style');
@@ -298,8 +303,8 @@ function buildPage() {
     <nav class="bottom-nav" id="bottomNav">
         <div class="nav-item"><button class="nav-btn" data-target="top">🔝</button><span class="nav-label">回到顶部</span></div>
         <div class="nav-item"><button class="nav-btn" data-target="update-list">📋</button><span class="nav-label">近期更新</span></div>
-        <div class="nav-item"><button class="nav-btn" data-target="card-0">🔗</button><span class="nav-label">玉足</span></div>
-        <div class="nav-item"><button class="nav-btn" data-target="card-1">🔗</button><span class="nav-label">抖音Coser</span></div>
+        <div class="nav-item"><button class="nav-btn" data-target="card-1">🔗</button><span class="nav-label">玉足</span></div>
+        <div class="nav-item"><button class="nav-btn" data-target="card-0">🔗</button><span class="nav-label">抖音Coser</span></div>
         <div class="nav-item"><button class="nav-btn" data-target="hot-links">🔗</button><span class="nav-label">抖音网红</span></div>
         <div class="nav-item"><button class="nav-btn" data-target="top">🔗</button><span class="nav-label">解压教程</span></div>
     </nav>
@@ -656,7 +661,7 @@ function startDynamicCards() {
         if (btn) btn.textContent = `📂 查看全部Coser资源 (${updateCardsData[index].subCards.length}个)`;
     }
 
-    // 以下为三级子卡片独立展开/收起逻辑（保留原样，但修复提取码缺字）
+    // 以下为三级子卡片独立展开/收起逻辑（修复滚动问题）
     function renderSubSubPage(cardIndex, subIndex) {
         const sub = updateCardsData[cardIndex].subCards[subIndex];
         if (!sub || !sub.subSubCards) return;
@@ -671,16 +676,23 @@ function startDynamicCards() {
         if (state.page < 1) state.page = 1;
         if (state.page > total) state.page = total;
         const start = (state.page - 1) * per, end = Math.min(start + per, data.length);
-        let html = data.slice(start, end).map(item => {
-            return `<div class="sub-card" style="background:#f0edf7;">
-                <div class="sub-card-header"><strong style="flex:1;">${item.name}</strong></div>
-                <div style="display:flex; justify-content:flex-end; align-items:center; gap:6px; margin-top:4px; flex-wrap:wrap;">
-                    <a href="https://pan.xunlei.com/s/VOzRp5FniqYezSeLudryWJ1TA1?pwd=nkm8#" target="_blank" style="background:#7c3aed; color:#fff; padding:4px 8px; border-radius:14px; font-size:0.7rem; text-decoration:none;">解压教程</a>
-                    <a href="${item.link}" target="_blank" style="background:#e8618c; color:#fff; padding:4px 10px; border-radius:14px; font-size:0.7rem; text-decoration:none;">点我下载</a>
-                    <span class="pwd-tag" data-copy="${item.pwd}" style="font-size:0.7rem; padding:2px 6px;">🔑 提取码：${item.pwd}</span>
-                </div>
-            </div>`;
-        }).join('');
+		// 生成图片预览的HTML
+		const getPreviewHTML = (item) => {
+			const imgs = (item.images || []).map(src => `<img alt="预览" loading="lazy" onclick="openGallery(this)" src="${src}" />`).join('');
+			return imgs ? `<div class="preview-gallery" style="display:block;">${imgs}</div>` : '';
+		};
+
+		let html = data.slice(start, end).map(item => {
+			return `<div class="sub-card" style="background:#f0edf7;">
+				<div class="sub-card-header"><strong style="flex:1;">${item.name}</strong></div>
+				${getPreviewHTML(item)}
+				<div style="display:flex; justify-content:flex-end; align-items:center; gap:6px; margin-top:4px; flex-wrap:wrap;">
+					<a href="https://pan.xunlei.com/s/VOzRp5FniqYezSeLudryWJ1TA1?pwd=nkm8#" target="_blank" style="background:#7c3aed; color:#fff; padding:4px 8px; border-radius:14px; font-size:0.7rem; text-decoration:none;">解压教程</a>
+					<a href="${item.link}" target="_blank" style="background:#e8618c; color:#fff; padding:4px 10px; border-radius:14px; font-size:0.7rem; text-decoration:none;">点我下载</a>
+					<span class="pwd-tag" data-copy="${item.pwd}" style="font-size:0.7rem; padding:2px 6px;">🔑 提取码：${item.pwd}</span>
+				</div>
+			</div>`;
+		}).join('');
         if (total > 1) {
             html += `<div class="sub-pagination">
                 <button class="sub-sub-page-btn" data-card="${cardIndex}" data-sub="${subIndex}" data-page="${state.page - 1}" ${state.page <= 1 ? 'disabled' : ''}>上一页</button>
@@ -708,17 +720,22 @@ function startDynamicCards() {
             const batch = data.slice(state.allLoaded, state.allLoaded + 20);
             const frag = document.createDocumentFragment(), div = document.createElement('div');
             batch.forEach(item => {
-                div.innerHTML = `<div class="sub-card" style="background:#f0edf7;">
-                    <div class="sub-card-header"><strong style="flex:1;">${item.name}</strong></div>
-                    <div style="display:flex; justify-content:flex-end; align-items:center; gap:6px; margin-top:4px;">
-                        <a href="https://pan.xunlei.com/s/VOzRp5FniqYezSeLudryWJ1TA1?pwd=nkm8#" target="_blank" style="background:#7c3aed; color:#fff; padding:4px 8px; border-radius:14px; font-size:0.7rem; text-decoration:none;">解压教程</a>
-                        <a href="${item.link}" target="_blank" style="background:#e8618c; color:#fff; padding:4px 10px; border-radius:14px; font-size:0.7rem; text-decoration:none;">点我下载</a>
-                        <span class="pwd-tag" data-copy="${item.pwd}" style="font-size:0.7rem; padding:2px 6px;">🔑 提取码：${item.pwd}</span>
-                    </div>
-                </div>`;
+				const imgs = (item.images || []).map(src => `<img alt="预览" loading="lazy" onclick="openGallery(this)" src="${src}" />`).join('');
+				const previewHTML = imgs ? `<div class="preview-gallery" style="display:block;">${imgs}</div>` : '';
+
+				div.innerHTML = `<div class="sub-card" style="background:#f0edf7;">
+					<div class="sub-card-header"><strong style="flex:1;">${item.name}</strong></div>
+					${previewHTML}
+					<div style="display:flex; justify-content:flex-end; align-items:center; gap:6px; margin-top:4px;">
+						<a href="https://pan.xunlei.com/s/VOzRp5FniqYezSeLudryWJ1TA1?pwd=nkm8#" target="_blank" style="background:#7c3aed; color:#fff; padding:4px 8px; border-radius:14px; font-size:0.7rem; text-decoration:none;">解压教程</a>
+						<a href="${item.link}" target="_blank" style="background:#e8618c; color:#fff; padding:4px 10px; border-radius:14px; font-size:0.7rem; text-decoration:none;">点我下载</a>
+						<span class="pwd-tag" data-copy="${item.pwd}" style="font-size:0.7rem; padding:2px 6px;">🔑 提取码：${item.pwd}</span>
+					</div>
+				</div>`;
                 while (div.firstChild) frag.appendChild(div.firstChild);
             });
-            container.appendChild(frag);
+          
+		  container.appendChild(frag);
             state.allLoaded += batch.length;
             if (state.allLoaded < data.length) {
                 const sentinelDiv = document.createElement('div'); sentinelDiv.className = 'sub-sub-all-sentinel'; sentinelDiv.style.height = '1px';
@@ -728,7 +745,7 @@ function startDynamicCards() {
         })();
     }
 
-    // 三级子卡片交互事件
+    // 三级子卡片交互事件（添加滚动）
     document.addEventListener('click', function(e) {
         const t = e.target;
         if (t.matches('.sub-sub-load-btn')) {
@@ -740,6 +757,8 @@ function startDynamicCards() {
                     renderSubSubPage(cardIdx, subIdx);
                     container.style.display = 'block';
                     t.textContent = `📂 收起${updateCardsData[cardIdx].subCards[subIdx].name}资源`;
+                    // 滚动到三级容器顶部
+                    container.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 } else {
                     container.style.display = 'none';
                     container.innerHTML = '';
@@ -754,11 +773,23 @@ function startDynamicCards() {
             if (subSubStates[key] && subSubStates[key].mode === 'page') {
                 subSubStates[key].page = page;
                 renderSubSubPage(cardIdx, subIdx);
+                // 滚动到三级容器顶部
+                const container = document.getElementById(`sub-sub-container-${cardIdx}-${subIdx}`);
+                if (container) {
+                    container.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
             }
         } else if (t.matches('.sub-sub-view-all-btn')) {
             const cardIdx = parseInt(t.dataset.card);
             const subIdx = parseInt(t.dataset.sub);
             startSubSubViewAll(cardIdx, subIdx);
+            // 延迟滚动，等待内容渲染
+            setTimeout(() => {
+                const container = document.getElementById(`sub-sub-container-${cardIdx}-${subIdx}`);
+                if (container) {
+                    container.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            }, 150);
         } else if (t.matches('.sub-sub-collapse-all-btn')) {
             const cardIdx = parseInt(t.dataset.card);
             const subIdx = parseInt(t.dataset.sub);
@@ -990,4 +1021,4 @@ document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') closeLightbox();
 });
 
-console.log('✅ app.js 加载完毕，搜索已支持二级/三级平铺，三级提取码显示完整');
+console.log('✅ app.js 加载完毕，搜索已支持二级/三级平铺，三级提取码显示完整，搜索结果中三级卡片已显示图片');
