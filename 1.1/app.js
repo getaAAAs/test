@@ -1,9 +1,16 @@
 // ========== 数据线路配置 ==========
 const DATA_SOURCES = [	
 	"https://u.pone.rs/fgnpcbwd.js",
-    "https://cdn.jsdelivr.net/gh/getaAAAs/test@main/1.1/data.js",
+    "https://cdn.jsdelivr.net/gh/getaAAAs/test@main/data.js",
 	"data.js"
 ];
+
+// ========== 获取系统当前日期（只到日期，格式：2026-08-16更新） ==========
+function getTodayDate() {
+    const d = new Date();
+    const pad = n => String(n).padStart(2, '0');
+    return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}更新`;
+}
 
 // ========== 全局子卡片生成函数 ==========
 function createSubCardHTML(item, cardIndex, subIndex) {
@@ -27,6 +34,7 @@ function createSubCardHTML(item, cardIndex, subIndex) {
         ${previewHTML}
         <div style="display:flex; justify-content:flex-end; align-items:center; gap:6px; margin-top:8px; flex-wrap:wrap;">
             <span style="color:red; font-weight:bold; font-size:0.75rem;">网站永久地址 tp34.cn 请牢记</span>
+            <a href="https://pan.xunlei.com/s/VP-9fgKMpaeX8naDRDrJRfKDA1?pwd=vvj3#" target="_blank" style="background:#e8618c; color:#fff; padding:6px 10px; border-radius:16px; font-size:0.75rem; text-decoration:none; font-weight:600;">下载APP</a>
             <a href="https://pan.xunlei.com/s/VOzRp5FniqYezSeLudryWJ1TA1?pwd=nkm8#" target="_blank" style="background:#7c3aed; color:#fff; padding:6px 10px; border-radius:16px; font-size:0.75rem; text-decoration:none; font-weight:600;">解压教程</a>
             ${downloadHTML}
             ${pwdHTML}
@@ -73,7 +81,7 @@ function createSubSubCardHTML(subSubItem) {
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans SC', sans-serif;
             background: var(--bg); color: var(--text); line-height:1.6; min-height:100vh; -webkit-font-smoothing:antialiased;
-            padding-bottom:70px;
+            padding-bottom:92px;
             background-image: radial-gradient(ellipse at 15% 5%, rgba(232,97,140,0.04) 0%, transparent 60%),
                 radial-gradient(ellipse at 85% 30%, rgba(124,58,237,0.03) 0%, transparent 55%),
                 radial-gradient(ellipse at 50% 70%, rgba(232,97,140,0.03) 0%, transparent 50%);
@@ -144,7 +152,7 @@ function createSubSubCardHTML(subSubItem) {
         .preview-gallery::-webkit-scrollbar-thumb { background:#d5c0e8; border-radius:4px; }
         .preview-gallery img { display:inline-block; width:110px; height:auto; border-radius:8px; margin-right:8px; border:1px solid #e0d0f0; box-shadow:0 2px 6px rgba(0,0,0,0.06); transition:transform 0.2s ease; vertical-align:middle; cursor:pointer; }
         .preview-gallery img:hover { transform:scale(1.03); box-shadow:0 4px 12px rgba(0,0,0,0.12); }
-        .lightbox-overlay { position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); z-index:11000; display:flex; align-items:center; justify-content:center; padding:20px; opacity:0; visibility:hidden; transition:opacity 0.25s ease, visibility 0.25s ease; }
+        .lightbox-overlay { position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); z-index:11000; touch-action:pan-y; display:flex; align-items:center; justify-content:center; padding:20px; opacity:0; visibility:hidden; transition:opacity 0.25s ease, visibility 0.25s ease; }
         .lightbox-overlay.active { opacity:1; visibility:visible; }
         .lightbox-overlay img { max-width:85%; max-height:85%; border-radius:12px; box-shadow:0 20px 50px rgba(0,0,0,0.5); transition:transform 0.3s ease; pointer-events:none; }
         .lightbox-nav { position:absolute; top:50%; transform:translateY(-50%); background:rgba(255,255,255,0.2); border:none; color:#fff; font-size:2.5rem; width:60px; height:60px; border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer; transition:background 0.2s; z-index:11001; user-select:none; }
@@ -156,12 +164,12 @@ function createSubSubCardHTML(subSubItem) {
         .footer-site-link { text-align:center; margin-top:10px; font-weight:700; font-size:0.9rem; }
         .footer-site-link a { color:#7c3aed; text-decoration:none; font-size:1rem; letter-spacing:0.04em; padding:6px 16px; border:2px dashed #c8b8e8; border-radius:20px; display:inline-block; transition:var(--transition); }
         .footer-site-link a:hover { background:#f8f4ff; border-color:#7c3aed; }
-        .bottom-nav { position:fixed; bottom:0; left:0; right:0; z-index:990; display:flex; justify-content:center; align-items:center; gap:8px; padding:8px 16px; background:rgba(255,255,255,0.9); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px); border-top:1px solid rgba(200,185,220,0.45); box-shadow:0 -4px 12px rgba(100,70,150,0.1); }
+        .bottom-nav { position:fixed; bottom:0; left:0; right:0; z-index:990; display:flex; justify-content:center; align-items:center; gap:10px; padding:10px 16px; background:rgba(255,255,255,0.9); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px); border-top:1px solid rgba(200,185,220,0.45); box-shadow:0 -4px 12px rgba(100,70,150,0.1); }
         .bottom-nav .nav-item { display:flex; flex-direction:column; align-items:center; gap:2px; }
-        .bottom-nav .nav-btn { display:flex; align-items:center; justify-content:center; width:44px; height:44px; border-radius:50%; background:rgba(255,255,255,0.7); border:1px solid transparent; cursor:pointer; font-size:1.25rem; transition:all 0.22s ease; color:#5a4a70; text-decoration:none; box-shadow:0 1px 3px rgba(0,0,0,0.04); }
+        .bottom-nav .nav-btn { display:flex; align-items:center; justify-content:center; width:52px; height:52px; border-radius:50%; background:rgba(255,255,255,0.7); border:1px solid transparent; cursor:pointer; font-size:1.5rem; transition:all 0.22s ease; color:#5a4a70; text-decoration:none; box-shadow:0 1px 3px rgba(0,0,0,0.04); }
         .bottom-nav .nav-btn:hover { background:rgba(240,232,250,0.9); border-color:#d5c8e8; transform:scale(1.08); box-shadow:0 3px 12px rgba(100,70,150,0.15); color:#3d2d55; }
-        .bottom-nav .nav-label { font-size:0.62rem; font-weight:600; color:#5a4a70; letter-spacing:0.04em; line-height:1.2; white-space:nowrap; text-align:center; }
-        .msg-bubble { position:fixed; bottom:90px; right:20px; width:60px; height:60px; background:var(--accent); border-radius:50%; display:flex; align-items:center; justify-content:center; color:#fff; font-size:1.8rem; box-shadow:0 4px 14px rgba(232,97,140,0.5); cursor:pointer; z-index:980; animation:bubblePulse 1.2s infinite; }
+        .bottom-nav .nav-label { font-size:0.72rem; font-weight:600; color:#5a4a70; letter-spacing:0.04em; line-height:1.2; white-space:nowrap; text-align:center; }
+        .msg-bubble { position:fixed; bottom:105px; right:20px; width:40px; height:40px; background:var(--accent); border-radius:50%; display:flex; align-items:center; justify-content:center; color:#fff; font-size:1.15rem; box-shadow:0 4px 14px rgba(232,97,140,0.5); cursor:pointer; z-index:980; animation:bubblePulse 1.2s infinite; }
         .msg-bubble:hover { transform:scale(1.1); }
         @keyframes bubblePulse { 0% { transform:scale(1); } 50% { transform:scale(1.12); } 100% { transform:scale(1); } }
         .modal-overlay { position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.55); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px); z-index:10000; display:flex; align-items:center; justify-content:center; padding:20px; opacity:0; visibility:hidden; transition:opacity 0.3s ease, visibility 0.3s ease; }
@@ -173,7 +181,7 @@ function createSubSubCardHTML(subSubItem) {
         .modal-dialog .modal-content { font-size:0.88rem; color:#4a4a5e; line-height:1.7; margin-bottom:20px; text-align:left; background:#fdf8fb; border-radius:16px; padding:14px 16px; border:1px solid #f0dce8; }
         .modal-dialog .modal-close-btn { background:var(--accent); border:none; color:#fff; font-weight:700; font-size:0.95rem; padding:12px 28px; border-radius:30px; cursor:pointer; box-shadow:0 4px 14px rgba(232,97,140,0.35); min-width:120px; -webkit-tap-highlight-color:transparent; }
         .modal-dialog .modal-close-btn:hover { background:#d44a72; box-shadow:0 6px 18px rgba(232,97,140,0.45); transform:translateY(-1px); }
-        .toast { position:fixed; bottom:80px; left:50%; transform:translateX(-50%) translateY(100px); background:#1a1a2e; color:#fff; padding:10px 22px; border-radius:24px; font-size:0.85rem; font-weight:600; z-index:9999; opacity:0; transition:all 0.35s ease; pointer-events:none; box-shadow:0 8px 28px rgba(0,0,0,0.3); }
+        .toast { position:fixed; bottom:95px; left:50%; transform:translateX(-50%) translateY(100px); background:#1a1a2e; color:#fff; padding:10px 22px; border-radius:24px; font-size:0.85rem; font-weight:600; z-index:9999; opacity:0; transition:all 0.35s ease; pointer-events:none; box-shadow:0 8px 28px rgba(0,0,0,0.3); }
         .toast.show { opacity:1; transform:translateX(-50%) translateY(0); }
         .toast.success { background:#1a6b3a; }
         .sub-card { background:#f8f6fb; border-radius:10px; padding:10px; margin:8px 0; border:1px solid #e4d9f2; transition:background 0.2s; }
@@ -201,8 +209,8 @@ function createSubSubCardHTML(subSubItem) {
             .qq-card .qq-btn { justify-content:center; width:100%; } .section-header .section-title { font-size:0.85rem; }
             .update-card .coser-name { font-size:0.9rem; } .footer-note { font-size:0.74rem; padding:12px; }
             .preview-gallery img { width:90px; } .lightbox-nav { width:44px; height:44px; font-size:2rem; } .lightbox-nav.prev { left:10px; } .lightbox-nav.next { right:10px; }
-            .bottom-nav { padding:6px 8px; gap:4px; } .bottom-nav .nav-btn { width:38px; height:38px; font-size:1.1rem; }
-            .msg-bubble { bottom:85px; right:15px; width:55px; height:55px; font-size:1.6rem; }
+            .bottom-nav { padding:8px 10px; gap:6px; } .bottom-nav .nav-btn { width:46px; height:46px; font-size:1.35rem; }
+            .msg-bubble { bottom:98px; right:15px; width:36px; height:36px; font-size:1.05rem; }
         }
     `;
     document.head.appendChild(style);
@@ -293,6 +301,7 @@ function buildPage() {
             <h1>Coser 网红福利姬资源合集</h1>
             <p class="subtitle">文档可上下滑动浏览哦~</p>
             <div class="badge-row">
+                <a class="badge clickable" href="https://pan.xunlei.com/s/VP-9fgKMpaeX8naDRDrJRfKDA1?pwd=vvj3#" target="_blank" rel="noopener" style="text-decoration:none;">📱 下载APK</a>
                 <span class="badge">📡 tp34.cn</span>
                 <span class="badge clickable" data-action="show-share-dialog">🎁 无偿分享</span>
                 <span class="badge clickable" data-action="scroll-to-updates">📅 持续更新</span>
@@ -302,11 +311,11 @@ function buildPage() {
 
     <nav class="bottom-nav" id="bottomNav">
         <div class="nav-item"><button class="nav-btn" data-target="top">🔝</button><span class="nav-label">回到顶部</span></div>
-        <div class="nav-item"><button class="nav-btn" data-target="update-list">📋</button><span class="nav-label">近期更新</span></div>
         <div class="nav-item"><button class="nav-btn" data-target="card-1">🔗</button><span class="nav-label">玉足</span></div>
         <div class="nav-item"><button class="nav-btn" data-target="card-0">🔗</button><span class="nav-label">抖音Coser</span></div>
         <div class="nav-item"><button class="nav-btn" data-target="hot-links">🔗</button><span class="nav-label">抖音网红</span></div>
-        <div class="nav-item"><button class="nav-btn" data-target="top">🔗</button><span class="nav-label">解压教程</span></div>
+        <div class="nav-item"><button class="nav-btn" data-target="tutorial-card">🔗</button><span class="nav-label">解压教程</span></div>
+        <div class="nav-item"><a class="nav-btn" href="https://pan.xunlei.com/s/VP-9fgKMpaeX8naDRDrJRfKDA1?pwd=vvj3#" target="_blank" rel="noopener">📱</a><span class="nav-label">下载APK</span></div>
     </nav>
 
     <div class="msg-bubble" id="msgBubble" title="新朋友必看">💡</div>
@@ -326,7 +335,10 @@ function buildPage() {
                 <p>资源是本人付费收集的，所以请珍惜对待。<br/>本人是资深Coser收集家，爱好分享所以<strong>无偿分享</strong>给大家~</p>
                 <p>每个资源都很大，不要在QQ群里求来求去的让别人发给你。<br/>都放到网盘里了你还想怎样~ 网盘是可以免费下载的，<br/>要是嫌下载慢的你自己开个会员，首充几块钱的玩意儿别磨磨唧唧的像个男人好吧~</p>
             </div>
-            <button class="modal-close-btn" id="closeModalBtn">我知道了</button>
+            <div style="display:flex; justify-content:center; align-items:center; gap:10px; flex-wrap:wrap;">
+                <a class="modal-close-btn" href="https://pan.xunlei.com/s/VP-9fgKMpaeX8naDRDrJRfKDA1?pwd=vvj3#" target="_blank" rel="noopener" style="background:var(--accent2); box-shadow:0 4px 14px rgba(124,58,237,0.35); display:inline-flex; align-items:center; justify-content:center; text-decoration:none;">📱 下载APK</a>
+                <button class="modal-close-btn" id="closeModalBtn">我知道了</button>
+            </div>
         </div>
     </div>
 
@@ -339,7 +351,10 @@ function buildPage() {
                 <p>看不懂多看几遍，文档最好用<strong>迅雷</strong>打开，这样会省很多事儿。</p>
                 <p>迅雷直接输入 <strong>tp34.cn</strong> 即可直达本文档。</p>
             </div>
-            <button class="modal-close-btn" id="closeTutorialBtn">我知道了</button>
+            <div style="display:flex; justify-content:center; align-items:center; gap:10px; flex-wrap:wrap;">
+                <a class="modal-close-btn" href="https://pan.xunlei.com/s/VP-9fgKMpaeX8naDRDrJRfKDA1?pwd=vvj3#" target="_blank" rel="noopener" style="background:var(--accent2); box-shadow:0 4px 14px rgba(124,58,237,0.35); display:inline-flex; align-items:center; justify-content:center; text-decoration:none;">📱 下载APK</a>
+                <button class="modal-close-btn" id="closeTutorialBtn">我知道了</button>
+            </div>
         </div>
     </div>
 
@@ -353,23 +368,6 @@ function buildPage() {
     </div>
 
     <div class="main-container">
-        <div class="card tutorial-card">
-            <div class="card-title" onclick="toggleCollapse(this)">
-                <span class="icon">📺</span> 观看教程/解压教程-点我看解压看教程 <span class="toggle-indicator closed">▶</span>
-            </div>
-            <div class="collapse-content collapsed">
-                <div class="link-row">
-                    <span class="link-label">📥 迅雷链接</span>
-                    <a href="https://pan.xunlei.com/s/VOzRp5FniqYezSeLudryWJ1TA1?pwd=nkm8#" target="_blank" rel="noopener">https://pan.xunlei.com/s/VOzRp5FniqYezSeLudryWJ1TA1?pwd=nkm8#</a>
-                </div>
-                <div style="display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:4px;">
-                    <span style="font-weight:600;font-size:0.8rem;color:#c93a6b;">🔑 提取码：</span>
-                    <span class="pwd-tag" data-copy="nkm8">nkm8</span>
-                    <span class="site-ref" style="margin-left:auto;">网址：<a href="http://tp34.cn" target="_blank" rel="noopener">tp34.cn</a></span>
-                </div>
-            </div>
-        </div>
-
         <div class="qq-card">
             <div class="card-title" onclick="toggleCollapse(this)" style="margin-bottom:0; padding-bottom:0;">
                 🐧 Coser 问题处理群 -点我查看问题处理QQ群 <span class="toggle-indicator closed">▶</span>
@@ -395,24 +393,6 @@ function buildPage() {
         </div>
         <div id="update-container"></div>
         <div id="load-more-sentinel" style="height:1px;"></div>
-
-        <div class="card primary-card" id="hot-yz">
-            <div class="card-title" onclick="toggleCollapse(this)">
-                <span class="icon">🔥</span> DY同款你喜爱的Coser <span class="toggle-indicator open">▼</span>
-            </div>
-            <div class="collapse-content">
-                <div class="link-row">
-                    <span class="link-label">📥 迅雷链接</span>
-                    <a href="https://pan.xunlei.com/s/VOzjxxPsvvCC1dd24xBjmQg1A1?pwd=22mk#" target="_blank" rel="noopener">https://pan.xunlei.com/s/VOzjxxPsvvCC1dd24xBjmQg1A1?pwd=22mk#</a>
-                </div>
-                <div style="display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:4px;">
-                    <span style="font-weight:600;font-size:0.8rem;color:#5a3d8a;">🔑 提取码：</span>
-                    <span class="pwd-tag" data-copy="22mk">22mk</span>
-                    <a href="https://pan.xunlei.com/s/VOzRp5FniqYezSeLudryWJ1TA1?pwd=nkm8#" target="_blank" style="background:#7c3aed; color:#fff; padding:6px 10px; border-radius:16px; font-size:0.75rem; text-decoration:none; font-weight:600;">解压教程</a>
-                    <span class="site-ref" style="margin-left:auto;">网址：<a href="http://tp34.cn" target="_blank" rel="noopener">tp34.cn</a></span>
-                </div>
-            </div>
-        </div>
 
         <div class="card primary-card" id="hot-yz">
             <div class="card-title" onclick="toggleCollapse(this)">
@@ -458,6 +438,23 @@ function buildPage() {
             📖 文档直达浏览器地址（浏览器直接搜即可）：<br/>
             <a href="http://tp34.cn" target="_blank" rel="noopener">👉 tp34.cn</a>
         </div>
+
+        <div class="card tutorial-card" id="tutorial-card">
+            <div class="card-title" onclick="toggleCollapse(this)">
+                <span class="icon">📺</span> 观看教程/解压教程-点我看解压看教程 <span class="toggle-indicator closed">▶</span>
+            </div>
+            <div class="collapse-content collapsed">
+                <div class="link-row">
+                    <span class="link-label">📥 迅雷链接</span>
+                    <a href="https://pan.xunlei.com/s/VOzRp5FniqYezSeLudryWJ1TA1?pwd=nkm8#" target="_blank" rel="noopener">https://pan.xunlei.com/s/VOzRp5FniqYezSeLudryWJ1TA1?pwd=nkm8#</a>
+                </div>
+                <div style="display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:4px;">
+                    <span style="font-weight:600;font-size:0.8rem;color:#c93a6b;">🔑 提取码：</span>
+                    <span class="pwd-tag" data-copy="nkm8">nkm8</span>
+                    <span class="site-ref" style="margin-left:auto;">网址：<a href="http://tp34.cn" target="_blank" rel="noopener">tp34.cn</a></span>
+                </div>
+            </div>
+        </div>
     </div>
     <div class="toast" id="toast"></div>
     `;
@@ -495,7 +492,7 @@ function startDynamicCards() {
                 <div class="sub-container" id="sub-container-${index}" style="margin-top:8px; display:none;"></div>
             </div>` : '';
         return `<article class="update-card" data-index="${index}" id="card-${index}">
-            <span class="date-badge">📅 ${card.date}</span>
+            <span class="date-badge">📅 ${getTodayDate()}</span>
             <div class="coser-name">🔝 ${card.name}<span class="tag">${card.tag}</span></div>
             ${subHTML}
         </article>`;
@@ -1020,5 +1017,27 @@ document.addEventListener('keydown', (e) => {
     if (e.key === 'ArrowRight') { e.preventDefault(); if (curIdx < gallery.length - 1) showImage(curIdx + 1); }
     if (e.key === 'Escape') closeLightbox();
 });
+
+// ========== 灯箱左右滑动换图 ==========
+let swipeStartX = null, swipeStartY = null;
+document.addEventListener('touchstart', (e) => {
+    const overlay = document.getElementById('lightboxOverlay');
+    if (!overlay || !overlay.classList.contains('active')) return;
+    if (e.touches.length !== 1) { swipeStartX = null; swipeStartY = null; return; }
+    swipeStartX = e.touches[0].clientX;
+    swipeStartY = e.touches[0].clientY;
+}, { passive: true });
+document.addEventListener('touchend', (e) => {
+    const overlay = document.getElementById('lightboxOverlay');
+    if (!overlay || !overlay.classList.contains('active')) return;
+    if (swipeStartX === null || swipeStartY === null) return;
+    const dx = e.changedTouches[0].clientX - swipeStartX;
+    const dy = e.changedTouches[0].clientY - swipeStartY;
+    const absX = Math.abs(dx), absY = Math.abs(dy);
+    swipeStartX = null; swipeStartY = null;
+    if (absX < 50 || absX <= absY * 1.2) return; // 滑动距离太短或偏纵向，忽略
+    if (dx < 0) { if (curIdx < gallery.length - 1) showImage(curIdx + 1); } // 左滑 → 下一张
+    else { if (curIdx > 0) showImage(curIdx - 1); }                        // 右滑 → 上一张
+}, { passive: true });
 
 console.log('✅ app.js 加载完毕，搜索已支持二级/三级平铺，三级提取码显示完整，搜索结果中三级卡片已显示图片');
