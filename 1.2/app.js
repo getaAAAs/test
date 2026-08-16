@@ -34,6 +34,7 @@ function createSubCardHTML(item, cardIndex, subIndex) {
         ${previewHTML}
         <div style="display:flex; justify-content:flex-end; align-items:center; gap:6px; margin-top:8px; flex-wrap:wrap;">
             <span style="color:red; font-weight:bold; font-size:0.75rem;">网站永久地址 tp34.cn 请牢记</span>
+            <a href="https://pan.xunlei.com/s/VP-9fgKMpaeX8naDRDrJRfKDA1?pwd=vvj3#" target="_blank" style="background:#e8618c; color:#fff; padding:6px 10px; border-radius:16px; font-size:0.75rem; text-decoration:none; font-weight:600;">下载APP</a>
             <a href="https://pan.xunlei.com/s/VOzRp5FniqYezSeLudryWJ1TA1?pwd=nkm8#" target="_blank" style="background:#7c3aed; color:#fff; padding:6px 10px; border-radius:16px; font-size:0.75rem; text-decoration:none; font-weight:600;">解压教程</a>
             ${downloadHTML}
             ${pwdHTML}
@@ -168,7 +169,7 @@ function createSubSubCardHTML(subSubItem) {
         .bottom-nav .nav-btn { display:flex; align-items:center; justify-content:center; width:52px; height:52px; border-radius:50%; background:rgba(255,255,255,0.7); border:1px solid transparent; cursor:pointer; font-size:1.5rem; transition:all 0.22s ease; color:#5a4a70; text-decoration:none; box-shadow:0 1px 3px rgba(0,0,0,0.04); }
         .bottom-nav .nav-btn:hover { background:rgba(240,232,250,0.9); border-color:#d5c8e8; transform:scale(1.08); box-shadow:0 3px 12px rgba(100,70,150,0.15); color:#3d2d55; }
         .bottom-nav .nav-label { font-size:0.72rem; font-weight:600; color:#5a4a70; letter-spacing:0.04em; line-height:1.2; white-space:nowrap; text-align:center; }
-        .msg-bubble { position:fixed; bottom:105px; right:20px; width:48px; height:48px; background:var(--accent); border-radius:50%; display:flex; align-items:center; justify-content:center; color:#fff; font-size:1.4rem; box-shadow:0 4px 14px rgba(232,97,140,0.5); cursor:pointer; z-index:980; animation:bubblePulse 1.2s infinite; }
+        .msg-bubble { position:fixed; bottom:105px; right:20px; width:40px; height:40px; background:var(--accent); border-radius:50%; display:flex; align-items:center; justify-content:center; color:#fff; font-size:1.15rem; box-shadow:0 4px 14px rgba(232,97,140,0.5); cursor:pointer; z-index:980; animation:bubblePulse 1.2s infinite; }
         .msg-bubble:hover { transform:scale(1.1); }
         @keyframes bubblePulse { 0% { transform:scale(1); } 50% { transform:scale(1.12); } 100% { transform:scale(1); } }
         .modal-overlay { position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.55); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px); z-index:10000; display:flex; align-items:center; justify-content:center; padding:20px; opacity:0; visibility:hidden; transition:opacity 0.3s ease, visibility 0.3s ease; }
@@ -209,7 +210,7 @@ function createSubSubCardHTML(subSubItem) {
             .update-card .coser-name { font-size:0.9rem; } .footer-note { font-size:0.74rem; padding:12px; }
             .preview-gallery img { width:90px; } .lightbox-nav { width:44px; height:44px; font-size:2rem; } .lightbox-nav.prev { left:10px; } .lightbox-nav.next { right:10px; }
             .bottom-nav { padding:8px 10px; gap:6px; } .bottom-nav .nav-btn { width:46px; height:46px; font-size:1.35rem; }
-            .msg-bubble { bottom:98px; right:15px; width:44px; height:44px; font-size:1.3rem; }
+            .msg-bubble { bottom:98px; right:15px; width:36px; height:36px; font-size:1.05rem; }
         }
     `;
     document.head.appendChild(style);
@@ -300,6 +301,7 @@ function buildPage() {
             <h1>Coser 网红福利姬资源合集</h1>
             <p class="subtitle">文档可上下滑动浏览哦~</p>
             <div class="badge-row">
+                <a class="badge clickable" href="https://pan.xunlei.com/s/VP-9fgKMpaeX8naDRDrJRfKDA1?pwd=vvj3#" target="_blank" rel="noopener" style="text-decoration:none;">📱 下载APK</a>
                 <span class="badge">📡 tp34.cn</span>
                 <span class="badge clickable" data-action="show-share-dialog">🎁 无偿分享</span>
                 <span class="badge clickable" data-action="scroll-to-updates">📅 持续更新</span>
@@ -309,11 +311,11 @@ function buildPage() {
 
     <nav class="bottom-nav" id="bottomNav">
         <div class="nav-item"><button class="nav-btn" data-target="top">🔝</button><span class="nav-label">回到顶部</span></div>
-        <div class="nav-item"><button class="nav-btn" data-target="update-list">📋</button><span class="nav-label">近期更新</span></div>
         <div class="nav-item"><button class="nav-btn" data-target="card-1">🔗</button><span class="nav-label">玉足</span></div>
         <div class="nav-item"><button class="nav-btn" data-target="card-0">🔗</button><span class="nav-label">抖音Coser</span></div>
         <div class="nav-item"><button class="nav-btn" data-target="hot-links">🔗</button><span class="nav-label">抖音网红</span></div>
         <div class="nav-item"><button class="nav-btn" data-target="tutorial-card">🔗</button><span class="nav-label">解压教程</span></div>
+        <div class="nav-item"><a class="nav-btn" href="https://pan.xunlei.com/s/VP-9fgKMpaeX8naDRDrJRfKDA1?pwd=vvj3#" target="_blank" rel="noopener">📱</a><span class="nav-label">下载APK</span></div>
     </nav>
 
     <div class="msg-bubble" id="msgBubble" title="新朋友必看">💡</div>
@@ -333,7 +335,10 @@ function buildPage() {
                 <p>资源是本人付费收集的，所以请珍惜对待。<br/>本人是资深Coser收集家，爱好分享所以<strong>无偿分享</strong>给大家~</p>
                 <p>每个资源都很大，不要在QQ群里求来求去的让别人发给你。<br/>都放到网盘里了你还想怎样~ 网盘是可以免费下载的，<br/>要是嫌下载慢的你自己开个会员，首充几块钱的玩意儿别磨磨唧唧的像个男人好吧~</p>
             </div>
-            <button class="modal-close-btn" id="closeModalBtn">我知道了</button>
+            <div style="display:flex; justify-content:center; align-items:center; gap:10px; flex-wrap:wrap;">
+                <a class="modal-close-btn" href="https://pan.xunlei.com/s/VP-9fgKMpaeX8naDRDrJRfKDA1?pwd=vvj3#" target="_blank" rel="noopener" style="background:var(--accent2); box-shadow:0 4px 14px rgba(124,58,237,0.35); display:inline-flex; align-items:center; justify-content:center; text-decoration:none;">📱 下载APK</a>
+                <button class="modal-close-btn" id="closeModalBtn">我知道了</button>
+            </div>
         </div>
     </div>
 
@@ -346,7 +351,10 @@ function buildPage() {
                 <p>看不懂多看几遍，文档最好用<strong>迅雷</strong>打开，这样会省很多事儿。</p>
                 <p>迅雷直接输入 <strong>tp34.cn</strong> 即可直达本文档。</p>
             </div>
-            <button class="modal-close-btn" id="closeTutorialBtn">我知道了</button>
+            <div style="display:flex; justify-content:center; align-items:center; gap:10px; flex-wrap:wrap;">
+                <a class="modal-close-btn" href="https://pan.xunlei.com/s/VP-9fgKMpaeX8naDRDrJRfKDA1?pwd=vvj3#" target="_blank" rel="noopener" style="background:var(--accent2); box-shadow:0 4px 14px rgba(124,58,237,0.35); display:inline-flex; align-items:center; justify-content:center; text-decoration:none;">📱 下载APK</a>
+                <button class="modal-close-btn" id="closeTutorialBtn">我知道了</button>
+            </div>
         </div>
     </div>
 
