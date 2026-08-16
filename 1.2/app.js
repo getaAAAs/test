@@ -151,7 +151,7 @@ function createSubSubCardHTML(subSubItem) {
         .preview-gallery::-webkit-scrollbar-thumb { background:#d5c0e8; border-radius:4px; }
         .preview-gallery img { display:inline-block; width:110px; height:auto; border-radius:8px; margin-right:8px; border:1px solid #e0d0f0; box-shadow:0 2px 6px rgba(0,0,0,0.06); transition:transform 0.2s ease; vertical-align:middle; cursor:pointer; }
         .preview-gallery img:hover { transform:scale(1.03); box-shadow:0 4px 12px rgba(0,0,0,0.12); }
-        .lightbox-overlay { position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); z-index:11000; display:flex; align-items:center; justify-content:center; padding:20px; opacity:0; visibility:hidden; transition:opacity 0.25s ease, visibility 0.25s ease; }
+        .lightbox-overlay { position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); z-index:11000; touch-action:pan-y; display:flex; align-items:center; justify-content:center; padding:20px; opacity:0; visibility:hidden; transition:opacity 0.25s ease, visibility 0.25s ease; }
         .lightbox-overlay.active { opacity:1; visibility:visible; }
         .lightbox-overlay img { max-width:85%; max-height:85%; border-radius:12px; box-shadow:0 20px 50px rgba(0,0,0,0.5); transition:transform 0.3s ease; pointer-events:none; }
         .lightbox-nav { position:absolute; top:50%; transform:translateY(-50%); background:rgba(255,255,255,0.2); border:none; color:#fff; font-size:2.5rem; width:60px; height:60px; border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer; transition:background 0.2s; z-index:11001; user-select:none; }
@@ -1009,5 +1009,27 @@ document.addEventListener('keydown', (e) => {
     if (e.key === 'ArrowRight') { e.preventDefault(); if (curIdx < gallery.length - 1) showImage(curIdx + 1); }
     if (e.key === 'Escape') closeLightbox();
 });
+
+// ========== 灯箱左右滑动换图 ==========
+let swipeStartX = null, swipeStartY = null;
+document.addEventListener('touchstart', (e) => {
+    const overlay = document.getElementById('lightboxOverlay');
+    if (!overlay || !overlay.classList.contains('active')) return;
+    if (e.touches.length !== 1) { swipeStartX = null; swipeStartY = null; return; }
+    swipeStartX = e.touches[0].clientX;
+    swipeStartY = e.touches[0].clientY;
+}, { passive: true });
+document.addEventListener('touchend', (e) => {
+    const overlay = document.getElementById('lightboxOverlay');
+    if (!overlay || !overlay.classList.contains('active')) return;
+    if (swipeStartX === null || swipeStartY === null) return;
+    const dx = e.changedTouches[0].clientX - swipeStartX;
+    const dy = e.changedTouches[0].clientY - swipeStartY;
+    const absX = Math.abs(dx), absY = Math.abs(dy);
+    swipeStartX = null; swipeStartY = null;
+    if (absX < 50 || absX <= absY * 1.2) return; // 滑动距离太短或偏纵向，忽略
+    if (dx < 0) { if (curIdx < gallery.length - 1) showImage(curIdx + 1); } // 左滑 → 下一张
+    else { if (curIdx > 0) showImage(curIdx - 1); }                        // 右滑 → 上一张
+}, { passive: true });
 
 console.log('✅ app.js 加载完毕，搜索已支持二级/三级平铺，三级提取码显示完整，搜索结果中三级卡片已显示图片');
