@@ -1,9 +1,9 @@
 // ========== 数据线路配置 ==========
 const DATA_SOURCES = [	
     "https://cdn.jsdelivr.net/gh/getaAAAs/test@main/data.js",
-	"https://cdn.jsdelivr.net/gh/getaAAAs/test@main/1.1/data.js"
-	"https://cdn.jsdelivr.net/gh/getaAAAs/test@main/1.2/data.js"
-	"https://cdn.jsdelivr.net/gh/getaAAAs/test@main/1.3/data.js"
+	"https://cdn.jsdelivr.net/gh/getaAAAs/test@main/1.1/data.js",
+	"https://cdn.jsdelivr.net/gh/getaAAAs/test@main/1.2/data.js",
+	"https://cdn.jsdelivr.net/gh/getaAAAs/test@main/1.3/data.js",
 	"data.js"
 ];
 
@@ -231,7 +231,7 @@ const subStates = {};
 const subSubStates = {};
 const searchKeywords = {};
 
-function loadScript(url, timeout = 5000) {
+function loadScript(url, timeout = 15000) {
     return new Promise((resolve, reject) => {
         const script = document.createElement('script');
         script.src = url;
