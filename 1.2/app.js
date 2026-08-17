@@ -3,6 +3,7 @@ const DATA_SOURCES = [
     "https://cdn.jsdelivr.net/gh/getaAAAs/test@main/data.js",
 	"https://cdn.jsdelivr.net/gh/getaAAAs/test@main/1.1/data.js"
 	"https://cdn.jsdelivr.net/gh/getaAAAs/test@main/1.2/data.js"
+	"https://cdn.jsdelivr.net/gh/getaAAAs/test@main/1.3/data.js"
 	"data.js"
 ];
 
