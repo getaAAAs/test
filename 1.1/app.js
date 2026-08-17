@@ -1,9 +1,12 @@
 // ========== 数据线路配置 ==========
 const DATA_SOURCES = [	
-	"https://u.pone.rs/fgnpcbwd.js",
     "https://cdn.jsdelivr.net/gh/getaAAAs/test@main/data.js",
+	"https://cdn.jsdelivr.net/gh/getaAAAs/test@main/1.1/data.js"
+	"https://cdn.jsdelivr.net/gh/getaAAAs/test@main/1.2/data.js"
+	"https://cdn.jsdelivr.net/gh/getaAAAs/test@main/1.3/data.js"
 	"data.js"
 ];
+
 
 // ========== 获取系统当前日期（只到日期，格式：2026-08-16更新） ==========
 function getTodayDate() {
@@ -1041,3 +1044,81 @@ document.addEventListener('touchend', (e) => {
 }, { passive: true });
 
 console.log('✅ app.js 加载完毕，搜索已支持二级/三级平铺，三级提取码显示完整，搜索结果中三级卡片已显示图片');
+
+// ========== 新增：灯箱图片双指缩放 + 单指拖动 + 双击放大（不修改原有逻辑） ==========
+(function () {
+    // 注入覆盖样式（仅覆盖 transition，不改动原 CSS 其他属性）
+    const s = document.createElement('style');
+    s.textContent = '#lightboxImage{transition:none!important;transform-origin:center center;will-change:transform;}';
+    document.head.appendChild(s);
+
+    let scale = 1, tx = 0, ty = 0;
+    let initDist = 0, initScale = 1;
+    let pinching = false, dragging = false;
+    let dragSX = 0, dragSY = 0, dragSTX = 0, dragSTY = 0;
+    let lastTap = 0, tapMoved = false;
+
+    const img = () => document.getElementById('lightboxImage');
+    const overlay = () => document.getElementById('lightboxOverlay');
+    const active = () => { const o = overlay(); return o && o.classList.contains('active'); };
+    const apply = () => { const i = img(); if (i) i.style.transform = `translate(${tx}px,${ty}px) scale(${scale})`; };
+    const reset = () => { scale = 1; tx = 0; ty = 0; apply(); };
+    const dist = (t) => Math.hypot(t[0].clientX - t[1].clientX, t[0].clientY - t[1].clientY);
+
+    // 捕获阶段优先执行，缩放/拖动时阻止原有滑动换图逻辑
+    document.addEventListener('touchstart', (e) => {
+        if (!active()) return;
+        if (e.touches.length === 2) {
+            pinching = true; dragging = false;
+            initDist = dist(e.touches); initScale = scale;
+            e.preventDefault(); e.stopImmediatePropagation();
+        } else if (e.touches.length === 1) {
+            tapMoved = false;
+            if (scale > 1) {
+                dragging = true;
+                dragSX = e.touches[0].clientX; dragSY = e.touches[0].clientY;
+                dragSTX = tx; dragSTY = ty;
+                e.preventDefault(); e.stopImmediatePropagation();
+            }
+            const now = Date.now();
+            if (now - lastTap < 300) {
+                if (scale > 1) reset(); else { scale = 2; apply(); }
+                lastTap = 0;
+                e.preventDefault(); e.stopImmediatePropagation();
+            } else { lastTap = now; }
+        }
+    }, { passive: false, capture: true });
+
+    document.addEventListener('touchmove', (e) => {
+        if (!active()) return;
+        if (pinching && e.touches.length === 2) {
+            scale = Math.max(1, Math.min(5, initScale * (dist(e.touches) / initDist)));
+            apply(); tapMoved = true;
+            e.preventDefault(); e.stopImmediatePropagation();
+        } else if (dragging && e.touches.length === 1 && scale > 1) {
+            tx = dragSTX + (e.touches[0].clientX - dragSX);
+            ty = dragSTY + (e.touches[0].clientY - dragSY);
+            apply(); tapMoved = true;
+            e.preventDefault(); e.stopImmediatePropagation();
+        }
+    }, { passive: false, capture: true });
+
+    document.addEventListener('touchend', (e) => {
+        if (!active()) return;
+        if (pinching || dragging) {
+            if (e.touches.length < 2) pinching = false;
+            if (e.touches.length === 0) dragging = false;
+            if (scale < 1) reset();
+            e.preventDefault(); e.stopImmediatePropagation();
+        }
+    }, { passive: false, capture: true });
+
+    // 切换图片时自动重置缩放（监听 src 变化，不修改原 showImage）
+    const mo = new MutationObserver(reset);
+    const origOpen = window.openGallery;
+    window.openGallery = function (el) {
+        origOpen(el);
+        const i = img();
+        if (i) mo.observe(i, { attributes: true, attributeFilter: ['src'] });
+    };
+})();
