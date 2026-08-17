@@ -1,8 +1,8 @@
 // ========== 数据线路配置 ==========
 const DATA_SOURCES = [	
-	"https://u.pone.rs/fgnpcbwd.js",
     "https://cdn.jsdelivr.net/gh/getaAAAs/test@main/data.js",
-	"data.js"
+    "https://fastly.jsdelivr.net/gh/getaAAAs/test@main/data.js",
+    "https://gcore.jsdelivr.net/gh/getaAAAs/test@main/data.js"
 ];
 
 // ========== 获取系统当前日期（只到日期，格式：2026-08-16更新） ==========
