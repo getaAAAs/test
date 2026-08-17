@@ -231,7 +231,7 @@ const subStates = {};
 const subSubStates = {};
 const searchKeywords = {};
 
-function loadScript(url, timeout = 5000) {
+function loadScript(url, timeout = 15000) {
     return new Promise((resolve, reject) => {
         const script = document.createElement('script');
         script.src = url;
