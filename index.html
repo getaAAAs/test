@@ -49,10 +49,10 @@
         <div class="modal-title">主服务器加载失败 / 超时</div>
         <div class="modal-content">
             <p>请选择备用线路加载主程序：</p>
-            <button class="line-btn" data-url="https://cdn.jsdelivr.net/gh/getaAAAs/test@main/1.1/app.js?v=1.0.2">🌍 备用线路一 (v1.1)</button>
-            <button class="line-btn" data-url="https://fastly.jsdelivr.net/gh/getaAAAs/test@main/1.3/app.js?v=1.0.3">🌍 备用线路二 (v1.2)</button>
-            <button class="line-btn" data-url="https://gcore.jsdelivr.net/gh/getaAAAs/test@main/1.3/app.js?v=1.0.3">🌍 备用线路三 (v1.3)</button>
-            <button class="line-btn" data-url="https://raw.githubusercontent.com/getaAAAs/test/main/app.js">🌍 备用线路三 (v1.3)</button>
+            <button class="line-btn" data-url="https://cdn.jsdelivr.net/gh/getaAAAs/test@main/1.4/app.js?v=1.0.4">🌍 备用线路一 (v1.4)</button>
+            <button class="line-btn" data-url="https://cdn.jsdelivr.net/gh/getaAAAs/test@main/1.3/app.js?v=1.0.3">🌍 备用线路二 (v1.3)</button>
+			<button class="line-btn" data-url="https://fastly.jsdelivr.net/gh/getaAAAs/test@main/1.3/app.js?v=1.0.3">🌍 备用线路一 (v1.4)</button>
+            <button class="line-btn" data-url="https://gcore.jsdelivr.net/gh/getaAAAs/test@main/1.3/app.js?v=1.0.3">🌍 备用线路二 (v1.3)</button>
             <p style="font-size:0.75rem; color:#888; margin-top:8px;">您也可以稍后刷新页面重试</p>
         </div>
         <button class="modal-close-btn" onclick="document.getElementById('lineModal').classList.remove('active')">关闭</button>
@@ -62,14 +62,16 @@
 <script>
     // 所有线路按优先级排列，加载时会自动依次回退
     const APP_SOURCES = [
+        "https://cdn.jsdelivr.net/gh/getaAAAs/test@main/1.3/app.js?v=1.0.3",
         "https://cdn.jsdelivr.net/gh/getaAAAs/test@main/1.4/app.js?v=1.0.4",
-        "./app.js" // 本地兜底
+        "https://fastly.jsdelivr.net/gh/getaAAAs/test@main/1.3/app.js?v=1.0.3",
+        "https://gcore.jsdelivr.net/gh/getaAAAs/test@main/1.3/app.js?v=1.0.3"
     ];
 
     const loadingOverlay = document.getElementById('loadingOverlay');
     const lineModal = document.getElementById('lineModal');
 
-    function loadScript(url, timeout = 15000) {
+    function loadScript(url, timeout = 10000) {
         return new Promise((resolve, reject) => {
             const script = document.createElement('script');
             script.src = url;
@@ -119,7 +121,6 @@
             try {
                 await loadScript(url);
                 if (tryInit()) {
-                    loadingOverlay.style.display = 'none';
                     console.log('✅ 成功加载并初始化:', url);
                     return;
                 }
@@ -144,7 +145,6 @@
             try {
                 await loadScript(url);
                 if (tryInit()) {
-                    loadingOverlay.style.display = 'none';
                     return;
                 }
                 throw new Error('app.js 未正确初始化');
