@@ -368,22 +368,6 @@ function buildPage() {
     </div>
 
     <div class="main-container">
-        <div class="qq-card">
-            <div class="card-title" onclick="toggleCollapse(this)" style="margin-bottom:0; padding-bottom:0;">
-                🐧 Coser 问题处理群 -点我查看问题处理QQ群 <span class="toggle-indicator closed">▶</span>
-            </div>
-            <div class="collapse-content collapsed" style="padding-top:10px;">
-                <div class="qq-inner">
-                    <span class="qq-icon">🐧</span>
-                    <div class="qq-info">
-                        <div class="qq-label">Coser 问题处理群</div>
-                        <div class="qq-number">群号：1026669574</div>
-                        <div style="font-size:0.7rem;color:#6b8aaa;">进群前先把本文档看完再进群~ 处理一切不会看的疑难杂症</div>
-                    </div>
-                    <a class="qq-btn" href="https://qm.qq.com/q/KvtbT0EheU" target="_blank" rel="noopener">💬 点击直达Q群</a>
-                </div>
-            </div>
-        </div>
 
         <div class="section-header" id="update-list">
             <span class="line"></span>
