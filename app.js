@@ -311,7 +311,6 @@ function buildPage() {
 
     <nav class="bottom-nav" id="bottomNav">
         <div class="nav-item"><button class="nav-btn" data-target="top">🔝</button><span class="nav-label">回到顶部</span></div>
-        <div class="nav-item"><button class="nav-btn" data-target="card-1">🔗</button><span class="nav-label">玉足</span></div>
         <div class="nav-item"><button class="nav-btn" data-target="card-0">🔗</button><span class="nav-label">抖音Coser</span></div>
         <div class="nav-item"><button class="nav-btn" data-target="hot-links">🔗</button><span class="nav-label">抖音网红</span></div>
         <div class="nav-item"><button class="nav-btn" data-target="tutorial-card">🔗</button><span class="nav-label">解压教程</span></div>
