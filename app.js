@@ -377,24 +377,7 @@ function buildPage() {
         <div id="update-container"></div>
         <div id="load-more-sentinel" style="height:1px;"></div>
 
-        <div class="card primary-card" id="hot-yz">
-            <div class="card-title" onclick="toggleCollapse(this)">
-                <span class="icon">🔥</span> Coser玉足脚丫子 <span class="toggle-indicator open">▼</span>
-            </div>
-            <div class="collapse-content">
-                <div class="link-row">
-                    <span class="link-label">📥 迅雷链接</span>
-                    <a href="https://pan.xunlei.com/s/VOyIHVlf_XTPk_un4fE2yheqA1?pwd=24nk#" target="_blank" rel="noopener">https://pan.xunlei.com/s/VOyIHVlf_XTPk_un4fE2yheqA1?pwd=24nk#</a>
-                </div>
-                <div style="display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:4px;">
-                    <span style="font-weight:600;font-size:0.8rem;color:#5a3d8a;">🔑 提取码：</span>
-                    <span class="pwd-tag" data-copy="24nk">24nk</span>
-                    <a href="https://pan.xunlei.com/s/VOzRp5FniqYezSeLudryWJ1TA1?pwd=nkm8#" target="_blank" style="background:#7c3aed; color:#fff; padding:6px 10px; border-radius:16px; font-size:0.75rem; text-decoration:none; font-weight:600;">解压教程</a>
-                    <span class="site-ref" style="margin-left:auto;">网址：<a href="http://tp34.cn" target="_blank" rel="noopener">tp34.cn</a></span>
-                </div>
-            </div>
-        </div>
-
+		
         <div class="card primary-card" id="hot-links">
             <div class="card-title" onclick="toggleCollapse(this)">
                 <span class="icon">🔗</span> 热门网红童锣烧、小霞佩奇等 <span class="toggle-indicator open">▼</span>
